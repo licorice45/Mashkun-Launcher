@@ -19,7 +19,6 @@ title = "Steam Importer"
 initial_position = 2
 size = Vector2i(275, 150)
 unresizable = true
-always_on_top = true
 script = ExtResource("1_s0eyi")
 
 [node name="Background" type="ColorRect" parent="."]

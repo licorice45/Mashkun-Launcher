@@ -208,6 +208,8 @@ func resized():
 
 
 func _on_button_pressed():
+	if current_tile["command"] == "steam" && OS.get_name() == "Windows":
+		current_tile["command"] = "C:/Program Files (x86)/Steam/steam.exe"
 	OS.create_process(current_tile["command"], current_tile["arguments"])
 	print("Attempting to launching: " + current_tile["command"] + " " + str(current_tile["arguments"]))
 	$AudioStreamPlayer.stream = load("res://assets/sfx/confirmation.ogg")

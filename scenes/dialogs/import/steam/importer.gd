@@ -72,7 +72,7 @@ func steampage_request_done(result, response_code, headers, body):
 	var export_command = "{
 	\"command\": \"steam\",
 	\"arguments\": [
-		\"-applaunch "+input.text+"\"
+		\"-applaunch\", \""+input.text+"\"
 	]
 }"
 	

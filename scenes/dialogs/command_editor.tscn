@@ -6,7 +6,6 @@
 title = "Launch Command Editor"
 initial_position = 2
 size = Vector2i(350, 230)
-always_on_top = true
 min_size = Vector2i(350, 230)
 max_size = Vector2i(16384, 230)
 script = ExtResource("1_sjtgt")

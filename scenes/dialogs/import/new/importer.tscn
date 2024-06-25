@@ -7,7 +7,6 @@ title = "Add Tile"
 initial_position = 2
 size = Vector2i(275, 150)
 unresizable = true
-always_on_top = true
 script = ExtResource("1_wp3sp")
 
 [node name="Margin" type="MarginContainer" parent="."]

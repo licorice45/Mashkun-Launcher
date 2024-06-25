@@ -59,6 +59,10 @@ func _on_btn_save_pressed():
 		command = ""
 		args = [""]
 	
+	command.replace("\\", "/")
+	for arg in args:
+		arg.replace("\\", "/")
+	
 	var export_launcher = "{
 	\"command\": \""+ command +"\",
 	\"arguments\": "+ str(args) +"
