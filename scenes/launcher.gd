@@ -3,8 +3,6 @@ extends Control
 var current_tile
 var edit_mode
 
-@onready var filter = $Split/TilesList/Menu/LineEdit
-
 func _ready():
 	if FileAccess.file_exists("user://data/") == false:
 		DirAccess.make_dir_absolute("user://data/")
@@ -13,9 +11,11 @@ func _ready():
 	$Split/Preview/Container/Buttons/Menu.get_popup().id_pressed.connect(self.btn_context_id_pressed)
 	$Split/TilesList/Menu/BtnAdd.get_popup().id_pressed.connect(self.btn_add_id_pressed)
 
-func reload_data():
+func reload_data(): # Reloads all tiles and loads their metadata
 	var img = Image.new()
 	var imtx = ImageTexture.new()
+	
+	var filter = $Split/TilesList/Menu/Filter.text
 	var grid_position = Vector2(-1, -1)
 	var last_tile_position = Vector2(0, 0)
 	
@@ -74,39 +74,12 @@ func reload_data():
 				tile.texture_title = imtx.create_from_image(img.load_from_file(title))
 			
 			
-			if tile.metadata["name"].to_lower().contains(filter.text) == true || filter.text == "":
+			if tile.metadata["name"].to_lower().contains(filter) == true || filter == "":
 				hbox.add_child(tile)
 				grid_position.x += 1
 				tile.grid_position = grid_position
 				if grid_position == last_tile_position:
 					tile_click(tile)
-
-func save_reorder():
-	if edit_mode != null:
-		edit_mode = null
-		
-		var array = []
-		var n = 0
-		for row in $Split/TilesList/Scroll/Container.get_children():
-			array.append([])
-			for tile in row.get_children():
-				array[n].append(tile.filename)
-			n += 1
-		
-		var order = FileAccess.open("user://data/order.json", FileAccess.WRITE)
-		order.store_line(str(array))
-		order.close()
-		
-		reload_data()
-
-
-func resized():
-	if $AudioStreamPlayer.playing != true:
-		$AudioStreamPlayer.stream = load("res://assets/sfx/scroll.ogg")
-		$AudioStreamPlayer.play()
-	for child in $Split/TilesList/Scroll/Container.get_children():
-		child.resized()
-
 
 func tile_click(tile):
 	current_tile = tile
@@ -150,12 +123,14 @@ func tile_click(tile):
 	else:
 		$Split/Preview/Container/Buttons/Launch.disabled = false
 	
-	$Background.color = tile.metadata["color"][0]
+	reload_theme()
+	save_reorder()
+
+func reload_theme():
+	$Background.color = current_tile.metadata["color"][0]
 	
-	
-	
-	$Split/Preview/Container/Name.add_theme_color_override("font_color", tile.metadata["color"][2])
-	$Split/Preview/Container/Data/Description/Margin/Container/Scroll/Description.add_theme_color_override("font_color", tile.metadata["color"][2])
+	$Split/Preview/Container/Name.add_theme_color_override("font_color", current_tile.metadata["color"][2])
+	$Split/Preview/Container/Data/Description/Margin/Container/Scroll/Description.add_theme_color_override("font_color", current_tile.metadata["color"][2])
 	
 	var themer = load("res://assets/themes/launcher.tres")
 	var stylebox = StyleBoxFlat.new()
@@ -164,9 +139,9 @@ func tile_click(tile):
 	
 	$Split/Preview/Container/Buttons/Launch.theme = themer
 	
-	stylebox.bg_color = tile.metadata["color"][1]
-	stylebox_dark.bg_color = tile.metadata["color"][1]
-	stylebox_light.bg_color = tile.metadata["color"][1]
+	stylebox.bg_color = current_tile.metadata["color"][1]
+	stylebox_dark.bg_color = current_tile.metadata["color"][1]
+	stylebox_light.bg_color = current_tile.metadata["color"][1]
 	stylebox_dark.bg_color.v = 0.8
 	stylebox_light.bg_color.v = 1.2
 	
@@ -174,10 +149,10 @@ func tile_click(tile):
 	themer.set_stylebox("hover", "Button", stylebox_light)
 	themer.set_stylebox("pressed", "Button", stylebox_dark)
 	
-	themer.set_color("font_color", "Button", tile.metadata["color"][0])
-	themer.set_color("font_hover_color", "Button", tile.metadata["color"][0])
-	themer.set_color("font_pressed_color", "Button", tile.metadata["color"][0])
-	themer.set_color("font_focus_color", "Button", tile.metadata["color"][0])
+	themer.set_color("font_color", "Button", current_tile.metadata["color"][0])
+	themer.set_color("font_hover_color", "Button", current_tile.metadata["color"][0])
+	themer.set_color("font_pressed_color", "Button", current_tile.metadata["color"][0])
+	themer.set_color("font_focus_color", "Button", current_tile.metadata["color"][0])
 	
 	themer.set_font_size("font_size", "button", 24)
 	
@@ -194,10 +169,36 @@ func tile_click(tile):
 	themer_corner.set_stylebox("pressed", "Button", stylebox_dark_corner)
 	
 	$Split/Preview/Container/Buttons/Launch.theme = themer_corner
-	
-	save_reorder()
-	
-	
+
+func save_reorder():
+	if edit_mode != null:
+		edit_mode = null
+		
+		var array = []
+		var n = 0
+		for row in $Split/TilesList/Scroll/Container.get_children():
+			array.append([])
+			for tile in row.get_children():
+				array[n].append(tile.filename)
+			n += 1
+		
+		var order = FileAccess.open("user://data/order.json", FileAccess.WRITE)
+		order.store_line(str(array))
+		order.close()
+		
+		reload_data()
+
+func resized():
+	if $AudioStreamPlayer.playing != true:
+		$AudioStreamPlayer.stream = load("res://assets/sfx/scroll.ogg")
+		$AudioStreamPlayer.play()
+	for child in $Split/TilesList/Scroll/Container.get_children():
+		child.resized()
+
+
+
+
+
 
 func _on_button_pressed():
 	OS.create_process(current_tile["command"], current_tile["arguments"])

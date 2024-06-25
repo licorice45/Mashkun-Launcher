@@ -83,22 +83,28 @@ func _on_btn_save_pressed():
 	$".".queue_free()
 
 
+#Metadata
 func _on_input_text_changed(new_text):
 	namer = new_text
+
+func _on_description_text_changed():
+	description = $Margin/Container/Description/Margin/Container/Input.text
 
 func _on_tags_changed(new_text):
 	tags["publisher"] = $Margin/Container/Tags/Margin/Container/Publisher.text
 	tags["genre"] = $Margin/Container/Tags/Margin/Container/Genre.text
 	tags["series"] = $Margin/Container/Tags/Margin/Container/Series.text
 
+func _on_year_value_changed(value):
+	tags["year"] = $Margin/Container/Tags/Margin/Container/Year.value
+
+
 func _on_btn_color_changed(color):
 	colors = ["#"+$Margin/Container/Colors/Margin/Container/Buttons/BtnPrimary.color.to_html(false), "#"+$Margin/Container/Colors/Margin/Container/Buttons/BtnSecondary.color.to_html(false), "#"+$Margin/Container/Colors/Margin/Container/Buttons/BtnText.color.to_html(false)]
 	print(colors)
 
 
-
 #Images
-
 func btn_cover_pressed():
 	$FileDialog/Cover.popup()
 
@@ -127,12 +133,3 @@ func file_title_selected(path):
 	
 	$Margin/Container/Images/Margin/Container/BtnTitle.icon = ImageTexture.create_from_image(img.load_from_file(path))
 	img_title = img.load_from_file(path)
-
-
-
-func _on_year_value_changed(value):
-	tags["year"] = $Margin/Container/Tags/Margin/Container/Year.value
-
-
-func _on_description_text_changed():
-	description = $Margin/Container/Description/Margin/Container/Input.text

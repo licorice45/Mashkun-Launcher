@@ -42,6 +42,7 @@ theme_override_constants/separation = 8
 [node name="Preview" type="MarginContainer" parent="Split"]
 custom_minimum_size = Vector2(640, 0)
 layout_mode = 2
+size_flags_horizontal = 3
 theme_override_constants/margin_left = 8
 theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8
@@ -188,7 +189,7 @@ offset_bottom = 48.0
 grow_horizontal = 2
 theme_override_constants/separation = 8
 
-[node name="LineEdit" type="LineEdit" parent="Split/TilesList/Menu"]
+[node name="Filter" type="LineEdit" parent="Split/TilesList/Menu"]
 layout_mode = 2
 size_flags_horizontal = 3
 
@@ -239,5 +240,5 @@ that tile?"
 [connection signal="dragged" from="Split" to="." method="_on_h_split_container_dragged"]
 [connection signal="pressed" from="Split/Preview/Container/Buttons/Launch" to="." method="_on_button_pressed"]
 [connection signal="resized" from="Split/TilesList" to="." method="resized"]
-[connection signal="text_submitted" from="Split/TilesList/Menu/LineEdit" to="." method="_on_line_edit_text_submitted"]
+[connection signal="text_submitted" from="Split/TilesList/Menu/Filter" to="." method="_on_line_edit_text_submitted"]
 [connection signal="pressed" from="Split/TilesList/Menu/BtnSettings" to="." method="_on_btn_settings_pressed"]
