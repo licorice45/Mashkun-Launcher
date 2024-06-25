@@ -1,0 +1,43 @@
+[gd_scene load_steps=2 format=3 uid="uid://815bp0x3hnyn"]
+
+[ext_resource type="Script" path="res://scenes/dialogs/import/new/importer.gd" id="1_wp3sp"]
+
+[node name="Importer" type="Window"]
+title = "Add Tile"
+initial_position = 2
+size = Vector2i(275, 150)
+unresizable = true
+always_on_top = true
+script = ExtResource("1_wp3sp")
+
+[node name="Margin" type="MarginContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="Container" type="VBoxContainer" parent="Margin"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="Margin/Container"]
+layout_mode = 2
+text = "Enter Name for Data Folder:"
+
+[node name="Input" type="LineEdit" parent="Margin/Container"]
+layout_mode = 2
+placeholder_text = "Folder Name"
+
+[node name="BtnAdd" type="Button" parent="Margin/Container"]
+layout_mode = 2
+text = "Add"
+
+[connection signal="close_requested" from="." to="." method="_on_close_requested"]
+[connection signal="text_changed" from="Margin/Container/Input" to="." method="_input_changed"]
+[connection signal="text_submitted" from="Margin/Container/Input" to="." method="_on_input_text_submitted"]
+[connection signal="pressed" from="Margin/Container/BtnAdd" to="." method="_on_button_pressed"]

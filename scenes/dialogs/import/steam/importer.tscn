@@ -1,0 +1,81 @@
+[gd_scene load_steps=6 format=3 uid="uid://d3kbiiitdptei"]
+
+[ext_resource type="Script" path="res://scenes/dialogs/import/steam/importer.gd" id="1_s0eyi"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4gi3n"]
+bg_color = Color(0.172549, 0.466667, 0.858824, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ajvyi"]
+bg_color = Color(0.0750845, 0.300383, 0.591004, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g0se1"]
+bg_color = Color(0.331524, 0.591604, 0.95448, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vp2ft"]
+bg_color = Color(0.211765, 0.282353, 0.454902, 0.509804)
+
+[node name="SteamImporter" type="Window"]
+title = "Steam Importer"
+initial_position = 2
+size = Vector2i(275, 150)
+unresizable = true
+always_on_top = true
+script = ExtResource("1_s0eyi")
+
+[node name="Background" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.105882, 0.156863, 0.219608, 1)
+
+[node name="Margin" type="MarginContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_right = 16
+
+[node name="Container" type="VBoxContainer" parent="Margin"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="Margin/Container"]
+layout_mode = 2
+text = "Enter Steam Game ID:"
+clip_text = true
+
+[node name="Input" type="LineEdit" parent="Margin/Container"]
+layout_mode = 2
+placeholder_text = "Steam Game ID"
+
+[node name="BtnLoad" type="Button" parent="Margin/Container"]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_4gi3n")
+theme_override_styles/hover = SubResource("StyleBoxFlat_ajvyi")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_g0se1")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_vp2ft")
+disabled = true
+text = "Load"
+
+[node name="HTTP" type="Node" parent="."]
+
+[node name="cover" type="HTTPRequest" parent="HTTP"]
+
+[node name="title" type="HTTPRequest" parent="HTTP"]
+
+[node name="bg" type="HTTPRequest" parent="HTTP"]
+
+[node name="steampage" type="HTTPRequest" parent="HTTP"]
+
+[connection signal="close_requested" from="." to="." method="_on_close_requested"]
+[connection signal="text_changed" from="Margin/Container/Input" to="." method="_on_line_edit_text_changed"]
+[connection signal="text_submitted" from="Margin/Container/Input" to="." method="_on_input_text_submitted"]
+[connection signal="pressed" from="Margin/Container/BtnLoad" to="." method="_on_button_pressed"]
+[connection signal="request_completed" from="HTTP/cover" to="." method="cover_request_done"]
+[connection signal="request_completed" from="HTTP/title" to="." method="title_request_done"]
+[connection signal="request_completed" from="HTTP/bg" to="." method="bg_request_done"]
+[connection signal="request_completed" from="HTTP/steampage" to="." method="steampage_request_done"]

@@ -18,7 +18,3 @@ Button/styles/disabled = SubResource("StyleBoxFlat_g08uj")
 Button/styles/hover = SubResource("StyleBoxFlat_selso")
 Button/styles/normal = SubResource("StyleBoxFlat_720e5")
 Button/styles/pressed = SubResource("StyleBoxFlat_yynbm")
-MarginContainer/constants/margin_bottom = 8
-MarginContainer/constants/margin_left = 8
-MarginContainer/constants/margin_right = 8
-MarginContainer/constants/margin_top = 8

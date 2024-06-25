@@ -1,0 +1,243 @@
+[gd_scene load_steps=8 format=3 uid="uid://of14jsxj65s8"]
+
+[ext_resource type="Script" path="res://scenes/launcher.gd" id="1_l6onj"]
+[ext_resource type="Texture2D" uid="uid://2rqhv1kdol1o" path="res://assets/textures/bg.png" id="2_qf0mr"]
+[ext_resource type="Texture2D" uid="uid://bkq3p05862fuv" path="res://icon.svg" id="3_8vlrf"]
+[ext_resource type="Theme" uid="uid://d4kh4u5ncgyoa" path="res://assets/themes/launcher.tres" id="4_ic76o"]
+[ext_resource type="PackedScene" uid="uid://kbpbisap8pv1" path="res://scenes/launcher/tag.tscn" id="4_n26c5"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_re0hb"]
+bg_color = Color(0, 0, 0, 0.176471)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jd87x"]
+bg_color = Color(0, 0, 0, 0.176471)
+
+[node name="Launcher" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_l6onj")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.105882, 0.156863, 0.219608, 1)
+
+[node name="Split" type="HSplitContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 8
+
+[node name="Preview" type="MarginContainer" parent="Split"]
+custom_minimum_size = Vector2(640, 0)
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="Container" type="VBoxContainer" parent="Split/Preview"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Background" type="TextureRect" parent="Split/Preview/Container"]
+layout_mode = 2
+texture = ExtResource("2_qf0mr")
+expand_mode = 5
+stretch_mode = 4
+
+[node name="Title" type="TextureRect" parent="Split/Preview/Container/Background"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.164
+anchor_right = 1.0
+anchor_bottom = 0.931
+offset_top = 47.451
+offset_bottom = 0.0602112
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("3_8vlrf")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="Name" type="Label" parent="Split/Preview/Container"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Game Title"
+
+[node name="Data" type="HBoxContainer" parent="Split/Preview/Container"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 8
+
+[node name="Description" type="PanelContainer" parent="Split/Preview/Container/Data"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_re0hb")
+
+[node name="Margin" type="MarginContainer" parent="Split/Preview/Container/Data/Description"]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="Container" type="VBoxContainer" parent="Split/Preview/Container/Data/Description/Margin"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Split/Preview/Container/Data/Description/Margin/Container"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.172549, 0.466667, 0.858824, 1)
+text = "Description"
+
+[node name="Scroll" type="ScrollContainer" parent="Split/Preview/Container/Data/Description/Margin/Container"]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="Description" type="Label" parent="Split/Preview/Container/Data/Description/Margin/Container/Scroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+autowrap_mode = 2
+
+[node name="Tags" type="PanelContainer" parent="Split/Preview/Container/Data"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_jd87x")
+
+[node name="Margin" type="MarginContainer" parent="Split/Preview/Container/Data/Tags"]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="Scroll" type="ScrollContainer" parent="Split/Preview/Container/Data/Tags/Margin"]
+layout_mode = 2
+horizontal_scroll_mode = 0
+
+[node name="Container" type="VBoxContainer" parent="Split/Preview/Container/Data/Tags/Margin/Scroll"]
+layout_mode = 2
+
+[node name="Tag" parent="Split/Preview/Container/Data/Tags/Margin/Scroll/Container" instance=ExtResource("4_n26c5")]
+layout_mode = 2
+
+[node name="Buttons" type="HBoxContainer" parent="Split/Preview/Container"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Launch" type="Button" parent="Split/Preview/Container/Buttons"]
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("4_ic76o")
+text = "Launch"
+
+[node name="Menu" type="MenuButton" parent="Split/Preview/Container/Buttons"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+theme = ExtResource("4_ic76o")
+text = " ⋮ "
+flat = false
+item_count = 6
+popup/item_0/text = "Edit Metadata"
+popup/item_0/id = 0
+popup/item_1/text = "Edit Launch Command"
+popup/item_1/id = 1
+popup/item_2/text = "Open in File Manager"
+popup/item_2/id = 6
+popup/item_3/text = "Remove Tile"
+popup/item_3/id = 4
+popup/item_4/text = ""
+popup/item_4/id = 3
+popup/item_4/separator = true
+popup/item_5/text = "Open order.json"
+popup/item_5/id = 5
+
+[node name="TilesList" type="Control" parent="Split"]
+custom_minimum_size = Vector2(384, 0)
+layout_mode = 2
+
+[node name="Background" type="ColorRect" parent="Split/TilesList"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 56.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 0
+color = Color(0.0588235, 0.0588235, 0.0588235, 0.431373)
+
+[node name="Menu" type="HBoxContainer" parent="Split/TilesList"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 48.0
+grow_horizontal = 2
+theme_override_constants/separation = 8
+
+[node name="LineEdit" type="LineEdit" parent="Split/TilesList/Menu"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="BtnAdd" type="MenuButton" parent="Split/TilesList/Menu"]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+size_flags_horizontal = 0
+theme = ExtResource("4_ic76o")
+text = "+"
+flat = false
+item_count = 2
+popup/item_0/text = "Add Blank Tile"
+popup/item_0/id = 0
+popup/item_1/text = "Import from Steam"
+popup/item_1/id = 1
+
+[node name="BtnSettings" type="Button" parent="Split/TilesList/Menu"]
+visible = false
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+theme = ExtResource("4_ic76o")
+theme_override_font_sizes/font_size = 24
+text = "⚙"
+
+[node name="Scroll" type="ScrollContainer" parent="Split/TilesList"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 56.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Container" type="VBoxContainer" parent="Split/TilesList/Scroll"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+
+[node name="Dialogs" type="Node" parent="."]
+
+[node name="ConfirmationDialog" type="ConfirmationDialog" parent="Dialogs"]
+initial_position = 2
+size = Vector2i(234, 106)
+dialog_text = "Do you really want to delete
+that tile?"
+
+[connection signal="dragged" from="Split" to="." method="_on_h_split_container_dragged"]
+[connection signal="pressed" from="Split/Preview/Container/Buttons/Launch" to="." method="_on_button_pressed"]
+[connection signal="resized" from="Split/TilesList" to="." method="resized"]
+[connection signal="text_submitted" from="Split/TilesList/Menu/LineEdit" to="." method="_on_line_edit_text_submitted"]
+[connection signal="pressed" from="Split/TilesList/Menu/BtnSettings" to="." method="_on_btn_settings_pressed"]

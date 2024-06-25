@@ -1,0 +1,157 @@
+[gd_scene load_steps=2 format=3 uid="uid://duw1vgyewbo84"]
+
+[ext_resource type="Script" path="res://scenes/dialogs/command_editor.gd" id="1_sjtgt"]
+
+[node name="CommandEditor" type="Window"]
+title = "Launch Command Editor"
+initial_position = 2
+size = Vector2i(350, 230)
+always_on_top = true
+min_size = Vector2i(350, 230)
+max_size = Vector2i(16384, 230)
+script = ExtResource("1_sjtgt")
+
+[node name="Margin" type="MarginContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="Container" type="VBoxContainer" parent="Margin"]
+layout_mode = 2
+alignment = 1
+
+[node name="StyleSelect" type="PanelContainer" parent="Margin/Container"]
+layout_mode = 2
+
+[node name="Margin" type="MarginContainer" parent="Margin/Container/StyleSelect"]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="BtnOption" type="OptionButton" parent="Margin/Container/StyleSelect/Margin"]
+layout_mode = 2
+item_count = 4
+selected = 0
+popup/item_0/text = "Empty"
+popup/item_0/id = 0
+popup/item_1/text = "Directory"
+popup/item_1/id = 1
+popup/item_2/text = "Advanced Command"
+popup/item_2/id = 2
+popup/item_3/text = "Steam"
+popup/item_3/id = 3
+
+[node name="Directory" type="PanelContainer" parent="Margin/Container"]
+visible = false
+layout_mode = 2
+
+[node name="Margin" type="MarginContainer" parent="Margin/Container/Directory"]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="Container" type="VBoxContainer" parent="Margin/Container/Directory/Margin"]
+layout_mode = 2
+
+[node name="Input" type="HBoxContainer" parent="Margin/Container/Directory/Margin/Container"]
+layout_mode = 2
+
+[node name="Label" type="LineEdit" parent="Margin/Container/Directory/Margin/Container/Input"]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Path to game"
+editable = false
+
+[node name="BtnDialog" type="Button" parent="Margin/Container/Directory/Margin/Container/Input"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_horizontal = 8
+text = "..."
+
+[node name="Args" type="LineEdit" parent="Margin/Container/Directory/Margin/Container"]
+layout_mode = 2
+placeholder_text = "Arguments"
+
+[node name="AdvancedCommand" type="PanelContainer" parent="Margin/Container"]
+visible = false
+layout_mode = 2
+
+[node name="Margin" type="MarginContainer" parent="Margin/Container/AdvancedCommand"]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="Container" type="VBoxContainer" parent="Margin/Container/AdvancedCommand/Margin"]
+layout_mode = 2
+
+[node name="Label" type="LineEdit" parent="Margin/Container/AdvancedCommand/Margin/Container"]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Command"
+
+[node name="Args" type="LineEdit" parent="Margin/Container/AdvancedCommand/Margin/Container"]
+layout_mode = 2
+placeholder_text = "Arguments"
+
+[node name="Steam" type="PanelContainer" parent="Margin/Container"]
+visible = false
+layout_mode = 2
+
+[node name="Margin" type="MarginContainer" parent="Margin/Container/Steam"]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="Container" type="VBoxContainer" parent="Margin/Container/Steam/Margin"]
+layout_mode = 2
+
+[node name="SteamGame" type="LineEdit" parent="Margin/Container/Steam/Margin/Container"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Save" type="PanelContainer" parent="Margin/Container"]
+layout_mode = 2
+
+[node name="Margin" type="MarginContainer" parent="Margin/Container/Save"]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="BtnSave" type="Button" parent="Margin/Container/Save/Margin"]
+layout_mode = 2
+text = "Save"
+
+[node name="FileDialog" type="FileDialog" parent="."]
+title = "Open a File"
+size = Vector2i(312, 154)
+ok_button_text = "Open"
+file_mode = 0
+access = 2
+use_native_dialog = true
+
+[connection signal="close_requested" from="." to="." method="_on_close_requested"]
+[connection signal="item_selected" from="Margin/Container/StyleSelect/Margin/BtnOption" to="." method="_on_btn_option_item_selected"]
+[connection signal="text_changed" from="Margin/Container/Directory/Margin/Container/Input/Label" to="." method="_on_command_changed"]
+[connection signal="pressed" from="Margin/Container/Directory/Margin/Container/Input/BtnDialog" to="." method="_on_btn_dialog_pressed"]
+[connection signal="text_changed" from="Margin/Container/Directory/Margin/Container/Args" to="." method="_on_args_changed"]
+[connection signal="text_changed" from="Margin/Container/AdvancedCommand/Margin/Container/Label" to="." method="_on_command_changed"]
+[connection signal="text_changed" from="Margin/Container/AdvancedCommand/Margin/Container/Args" to="." method="_on_args_changed"]
+[connection signal="text_changed" from="Margin/Container/Steam/Margin/Container/SteamGame" to="." method="_on_steam_game_text_changed"]
+[connection signal="pressed" from="Margin/Container/Save/Margin/BtnSave" to="." method="_on_btn_save_pressed"]
+[connection signal="file_selected" from="FileDialog" to="." method="_on_file_dialog_file_selected"]

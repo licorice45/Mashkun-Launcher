@@ -1,0 +1,275 @@
+[gd_scene load_steps=4 format=3 uid="uid://cvmjoui55urse"]
+
+[ext_resource type="Script" path="res://scenes/dialogs/metadata_editor.gd" id="1_p8gtu"]
+[ext_resource type="Texture2D" uid="uid://iadtiyou2kc3" path="res://assets/textures/cover.png" id="1_q7ara"]
+[ext_resource type="Texture2D" uid="uid://2rqhv1kdol1o" path="res://assets/textures/bg.png" id="2_yvpnx"]
+
+[node name="MetadataEditor" type="Window"]
+title = "Metadata Editor"
+initial_position = 2
+size = Vector2i(450, 832)
+always_on_top = true
+min_size = Vector2i(450, 832)
+script = ExtResource("1_p8gtu")
+
+[node name="Margin" type="MarginContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="Container" type="VBoxContainer" parent="Margin"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Name" type="PanelContainer" parent="Margin/Container"]
+layout_mode = 2
+
+[node name="Margin" type="MarginContainer" parent="Margin/Container/Name"]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="Container" type="VBoxContainer" parent="Margin/Container/Name/Margin"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Margin/Container/Name/Margin/Container"]
+layout_mode = 2
+size_flags_vertical = 8
+text = "Name"
+horizontal_alignment = 1
+
+[node name="Input" type="LineEdit" parent="Margin/Container/Name/Margin/Container"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+tooltip_text = "Name"
+placeholder_text = "Name"
+
+[node name="Description" type="PanelContainer" parent="Margin/Container"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Margin" type="MarginContainer" parent="Margin/Container/Description"]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="Container" type="VBoxContainer" parent="Margin/Container/Description/Margin"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Margin/Container/Description/Margin/Container"]
+layout_mode = 2
+text = "Description"
+horizontal_alignment = 1
+
+[node name="Input" type="TextEdit" parent="Margin/Container/Description/Margin/Container"]
+layout_mode = 2
+size_flags_vertical = 3
+tooltip_text = "Description"
+placeholder_text = "Description"
+
+[node name="Tags" type="PanelContainer" parent="Margin/Container"]
+layout_mode = 2
+
+[node name="Margin" type="MarginContainer" parent="Margin/Container/Tags"]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="Container" type="VBoxContainer" parent="Margin/Container/Tags/Margin"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Margin/Container/Tags/Margin/Container"]
+layout_mode = 2
+text = "Tags"
+horizontal_alignment = 1
+
+[node name="Genre" type="LineEdit" parent="Margin/Container/Tags/Margin/Container"]
+layout_mode = 2
+tooltip_text = "Genre"
+placeholder_text = "Genre"
+
+[node name="Publisher" type="LineEdit" parent="Margin/Container/Tags/Margin/Container"]
+layout_mode = 2
+tooltip_text = "Publisher"
+placeholder_text = "Publisher"
+
+[node name="Series" type="LineEdit" parent="Margin/Container/Tags/Margin/Container"]
+layout_mode = 2
+tooltip_text = "Series"
+placeholder_text = "Series"
+
+[node name="Year" type="SpinBox" parent="Margin/Container/Tags/Margin/Container"]
+layout_mode = 2
+tooltip_text = "Year"
+min_value = 1950.0
+max_value = 3000.0
+value = 1950.0
+
+[node name="Images" type="PanelContainer" parent="Margin/Container"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="Margin" type="MarginContainer" parent="Margin/Container/Images"]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="Container" type="VBoxContainer" parent="Margin/Container/Images/Margin"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Margin/Container/Images/Margin/Container"]
+layout_mode = 2
+text = "Images"
+horizontal_alignment = 1
+
+[node name="BtnCover" type="Button" parent="Margin/Container/Images/Margin/Container"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+tooltip_text = "Cover"
+text = "Cover"
+icon = ExtResource("1_q7ara")
+alignment = 0
+icon_alignment = 2
+expand_icon = true
+
+[node name="BtnBg" type="Button" parent="Margin/Container/Images/Margin/Container"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+tooltip_text = "Background"
+text = "Background"
+icon = ExtResource("2_yvpnx")
+alignment = 0
+icon_alignment = 2
+expand_icon = true
+
+[node name="BtnTitle" type="Button" parent="Margin/Container/Images/Margin/Container"]
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
+size_flags_vertical = 4
+tooltip_text = "Title"
+text = "Title"
+alignment = 0
+icon_alignment = 2
+expand_icon = true
+
+[node name="Colors" type="PanelContainer" parent="Margin/Container"]
+layout_mode = 2
+
+[node name="Margin" type="MarginContainer" parent="Margin/Container/Colors"]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="Container" type="VBoxContainer" parent="Margin/Container/Colors/Margin"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Margin/Container/Colors/Margin/Container"]
+layout_mode = 2
+text = "Colors"
+horizontal_alignment = 1
+
+[node name="Buttons" type="HBoxContainer" parent="Margin/Container/Colors/Margin/Container"]
+layout_mode = 2
+alignment = 1
+
+[node name="BtnPrimary" type="ColorPickerButton" parent="Margin/Container/Colors/Margin/Container/Buttons"]
+custom_minimum_size = Vector2(128, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+tooltip_text = "Primary"
+text = "Primary"
+icon_alignment = 1
+vertical_icon_alignment = 0
+color = Color(0.105882, 0.156863, 0.219608, 1)
+edit_alpha = false
+
+[node name="BtnSecondary" type="ColorPickerButton" parent="Margin/Container/Colors/Margin/Container/Buttons"]
+custom_minimum_size = Vector2(128, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+tooltip_text = "Secondary"
+text = "Secondary"
+icon_alignment = 1
+vertical_icon_alignment = 0
+color = Color(0.172549, 0.466667, 0.858824, 1)
+edit_alpha = false
+
+[node name="BtnText" type="ColorPickerButton" parent="Margin/Container/Colors/Margin/Container/Buttons"]
+custom_minimum_size = Vector2(128, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+tooltip_text = "Text"
+text = "Text"
+icon_alignment = 1
+vertical_icon_alignment = 2
+color = Color(1, 1, 1, 1)
+
+[node name="BtnSave" type="Button" parent="Margin/Container"]
+layout_mode = 2
+text = "Save"
+
+[node name="FileDialog" type="Node" parent="."]
+
+[node name="Cover" type="FileDialog" parent="FileDialog"]
+title = "Open a File"
+initial_position = 2
+size = Vector2i(868, 484)
+ok_button_text = "Open"
+file_mode = 0
+access = 2
+filters = PackedStringArray("*.png;Portable Network Graphics (PNG)", "*.jpg, *.jpeg;Joint Photographic Experts Group (JPG)", "*.svg;Scalable Vector Graphics (SVG)")
+use_native_dialog = true
+
+[node name="Bg" type="FileDialog" parent="FileDialog"]
+title = "Open a File"
+initial_position = 2
+size = Vector2i(868, 484)
+ok_button_text = "Open"
+file_mode = 0
+access = 2
+filters = PackedStringArray("*.png;Portable Network Graphics (PNG)", "*.jpg, *.jpeg;Joint Photographic Experts Group (JPG)", "*.svg;Scalable Vector Graphics (SVG)")
+use_native_dialog = true
+
+[node name="Title" type="FileDialog" parent="FileDialog"]
+title = "Open a File"
+initial_position = 2
+size = Vector2i(868, 484)
+ok_button_text = "Open"
+file_mode = 0
+access = 2
+filters = PackedStringArray("*.png;Portable Network Graphics (PNG)", "*.jpg, *.jpeg;Joint Photographic Experts Group (JPG)", "*.svg;Scalable Vector Graphics (SVG)")
+use_native_dialog = true
+
+[connection signal="close_requested" from="." to="." method="_on_close_requested"]
+[connection signal="text_changed" from="Margin/Container/Name/Margin/Container/Input" to="." method="_on_input_text_changed"]
+[connection signal="text_changed" from="Margin/Container/Description/Margin/Container/Input" to="." method="_on_description_text_changed"]
+[connection signal="text_changed" from="Margin/Container/Tags/Margin/Container/Genre" to="." method="_on_tags_changed"]
+[connection signal="text_changed" from="Margin/Container/Tags/Margin/Container/Publisher" to="." method="_on_tags_changed"]
+[connection signal="text_changed" from="Margin/Container/Tags/Margin/Container/Series" to="." method="_on_tags_changed"]
+[connection signal="value_changed" from="Margin/Container/Tags/Margin/Container/Year" to="." method="_on_year_value_changed"]
+[connection signal="pressed" from="Margin/Container/Images/Margin/Container/BtnCover" to="." method="btn_cover_pressed"]
+[connection signal="pressed" from="Margin/Container/Images/Margin/Container/BtnBg" to="." method="btn_bg_pressed"]
+[connection signal="pressed" from="Margin/Container/Images/Margin/Container/BtnTitle" to="." method="_on_btn_title_pressed"]
+[connection signal="color_changed" from="Margin/Container/Colors/Margin/Container/Buttons/BtnPrimary" to="." method="_on_btn_color_changed"]
+[connection signal="color_changed" from="Margin/Container/Colors/Margin/Container/Buttons/BtnSecondary" to="." method="_on_btn_color_changed"]
+[connection signal="color_changed" from="Margin/Container/Colors/Margin/Container/Buttons/BtnText" to="." method="_on_btn_color_changed"]
+[connection signal="pressed" from="Margin/Container/BtnSave" to="." method="_on_btn_save_pressed"]
+[connection signal="file_selected" from="FileDialog/Cover" to="." method="file_cover_selected"]
+[connection signal="file_selected" from="FileDialog/Bg" to="." method="file_bg_selected"]
+[connection signal="file_selected" from="FileDialog/Title" to="." method="file_title_selected"]

@@ -1,0 +1,142 @@
+[gd_scene format=3 uid="uid://o46e1pk8uo4k"]
+
+[node name="Window" type="Window"]
+title = "Settings"
+initial_position = 2
+size = Vector2i(772, 720)
+min_size = Vector2i(772, 480)
+
+[node name="Margin" type="MarginContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="Container" type="VBoxContainer" parent="Margin"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Settings" type="HBoxContainer" parent="Margin/Container"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 8
+
+[node name="Categories" type="PanelContainer" parent="Margin/Container/Settings"]
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="Margin" type="MarginContainer" parent="Margin/Container/Settings/Categories"]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="Input" type="ItemList" parent="Margin/Container/Settings/Categories/Margin"]
+custom_minimum_size = Vector2(128, 0)
+layout_mode = 2
+item_count = 2
+item_0/text = "General"
+item_1/text = "Command"
+
+[node name="PanelContainer" type="PanelContainer" parent="Margin/Container/Settings"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Scroll" type="ScrollContainer" parent="Margin/Container/Settings/PanelContainer"]
+layout_mode = 2
+horizontal_scroll_mode = 0
+
+[node name="Margin" type="MarginContainer" parent="Margin/Container/Settings/PanelContainer/Scroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="Container" type="VBoxContainer" parent="Margin/Container/Settings/PanelContainer/Scroll/Margin"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 8
+
+[node name="General" type="PanelContainer" parent="Margin/Container/Settings/PanelContainer/Scroll/Margin/Container"]
+layout_mode = 2
+
+[node name="Margin" type="MarginContainer" parent="Margin/Container/Settings/PanelContainer/Scroll/Margin/Container/General"]
+layout_mode = 2
+
+[node name="Container" type="VBoxContainer" parent="Margin/Container/Settings/PanelContainer/Scroll/Margin/Container/General/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Label" type="Label" parent="Margin/Container/Settings/PanelContainer/Scroll/Margin/Container/General/Margin/Container"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.391819, 0.391819, 0.391819, 1)
+text = "General"
+horizontal_alignment = 1
+
+[node name="BtnPanelRight" type="CheckButton" parent="Margin/Container/Settings/PanelContainer/Scroll/Margin/Container/General/Margin/Container"]
+layout_mode = 2
+text = "Game Tile Panel on Right"
+
+[node name="Command" type="PanelContainer" parent="Margin/Container/Settings/PanelContainer/Scroll/Margin/Container"]
+layout_mode = 2
+
+[node name="Margin" type="MarginContainer" parent="Margin/Container/Settings/PanelContainer/Scroll/Margin/Container/Command"]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="Container" type="VBoxContainer" parent="Margin/Container/Settings/PanelContainer/Scroll/Margin/Container/Command/Margin"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Margin/Container/Settings/PanelContainer/Scroll/Margin/Container/Command/Margin/Container"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.389287, 0.389287, 0.389287, 1)
+text = "Command"
+horizontal_alignment = 1
+
+[node name="SteamDirectory" type="HBoxContainer" parent="Margin/Container/Settings/PanelContainer/Scroll/Margin/Container/Command/Margin/Container"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Margin/Container/Settings/PanelContainer/Scroll/Margin/Container/Command/Margin/Container/SteamDirectory"]
+layout_mode = 2
+text = "Steam Directory"
+
+[node name="Separator" type="Control" parent="Margin/Container/Settings/PanelContainer/Scroll/Margin/Container/Command/Margin/Container/SteamDirectory"]
+custom_minimum_size = Vector2(131, 0)
+layout_mode = 2
+
+[node name="Input" type="LineEdit" parent="Margin/Container/Settings/PanelContainer/Scroll/Margin/Container/Command/Margin/Container/SteamDirectory"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="BtnDialog" type="Button" parent="Margin/Container/Settings/PanelContainer/Scroll/Margin/Container/Command/Margin/Container/SteamDirectory"]
+custom_minimum_size = Vector2(32, 0)
+layout_mode = 2
+text = "..."
+
+[node name="Save" type="PanelContainer" parent="Margin/Container"]
+layout_mode = 2
+
+[node name="Margin" type="MarginContainer" parent="Margin/Container/Save"]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="Button" type="Button" parent="Margin/Container/Save/Margin"]
+layout_mode = 2
+focus_neighbor_top = NodePath("../../../Settings/PanelContainer/Scroll/Margin/Container/General/Margin/Container/BtnPanelRight")
+text = "Save"
