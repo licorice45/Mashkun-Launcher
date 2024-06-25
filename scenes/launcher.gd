@@ -135,7 +135,8 @@ func tile_click(tile):
 	save_reorder()
 
 func reload_theme():
-	$Background.color = current_tile.metadata["color"][0]
+	var tween = get_tree().create_tween()
+	tween.tween_property($Background, "color", Color(current_tile.metadata["color"][0]), 0.5)
 	
 	$Split/Preview/Container/Name.add_theme_color_override("font_color", current_tile.metadata["color"][2])
 	$Split/Preview/Container/Data/Description/Margin/Container/Scroll/Description.add_theme_color_override("font_color", current_tile.metadata["color"][2])

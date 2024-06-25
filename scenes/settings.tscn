@@ -85,7 +85,13 @@ horizontal_alignment = 1
 
 [node name="BtnPanelRight" type="CheckButton" parent="Margin/Container/Settings/PanelContainer/Scroll/Margin/Container/General/Margin/Container"]
 layout_mode = 2
-text = "Game Tile Panel on Right"
+button_pressed = true
+text = "Game Info Panel on Left"
+
+[node name="CheckButton" type="CheckButton" parent="Margin/Container/Settings/PanelContainer/Scroll/Margin/Container/General/Margin/Container"]
+layout_mode = 2
+button_pressed = true
+text = "Background Color fade in Animation"
 
 [node name="Command" type="PanelContainer" parent="Margin/Container/Settings/PanelContainer/Scroll/Margin/Container"]
 layout_mode = 2
