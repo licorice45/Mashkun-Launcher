@@ -31,10 +31,12 @@ func reload_data(): # Reloads all tiles and loads their metadata
 		order.close()
 	var order = JSON.parse_string(FileAccess.get_file_as_string("user://data/order.json"))
 	for row_data in order:
-		var hbox = load("res://scenes/launcher/h_box.tscn").instantiate()
+		var hbox = HBoxContainer.new()
+		hbox.add_theme_constant_override("separation", 0)
 		$Split/TilesList/Scroll/Container.add_child(hbox)
 		grid_position.y += 1
 		grid_position.x = -1
+		var combo_tile_width = 0
 		for tile_data in row_data:
 			var metadata = JSON.parse_string(FileAccess.get_file_as_string("user://data/"+tile_data+"/metadata.json"))
 			var command = JSON.parse_string(FileAccess.get_file_as_string("user://data/"+tile_data+"/command.json"))
@@ -73,13 +75,19 @@ func reload_data(): # Reloads all tiles and loads their metadata
 			else:
 				tile.texture_title = imtx.create_from_image(img.load_from_file(title))
 			
-			
 			if tile.metadata["name"].to_lower().contains(filter) == true || filter == "":
 				hbox.add_child(tile)
 				grid_position.x += 1
 				tile.grid_position = grid_position
 				if grid_position == last_tile_position:
 					tile_click(tile)
+			combo_tile_width += tile.aspect_ratio_x
+		
+		var w = $Split/TilesList.size.x
+		for tile in hbox.get_children():
+			tile.custom_minimum_size.x = tile.aspect_ratio_x * (w / combo_tile_width)
+			if 1 * (w / combo_tile_width) >= w && grid_position.x <= 3:
+				tile.custom_minimum_size.x = tile.aspect_ratio_x * (w / (combo_tile_width / (0.4 + (0.1*(grid_position.x + 1)))))
 
 func tile_click(tile):
 	current_tile = tile
@@ -192,8 +200,6 @@ func resized():
 	if $AudioStreamPlayer.playing != true:
 		$AudioStreamPlayer.stream = load("res://assets/sfx/scroll.ogg")
 		$AudioStreamPlayer.play()
-	for child in $Split/TilesList/Scroll/Container.get_children():
-		child.resized()
 
 
 

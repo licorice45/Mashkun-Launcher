@@ -1,11 +1,30 @@
-[gd_scene load_steps=2 format=3 uid="uid://6l5sh0uhvxet"]
+[gd_scene load_steps=2 format=3 uid="uid://4fdg6s31ipe1"]
 
-[ext_resource type="Script" path="res://scenes/launcher/h_box.gd" id="1_amxta"]
+[sub_resource type="GDScript" id="GDScript_v5ivf"]
+script/source = "extends HBoxContainer
+
+func resized():
+	var w = $\".\".get_parent().get_parent().get_parent().size.x
+	var n = $\".\".get_child_count()
+	
+	var scal = w / $\".\".size.x
+	
+	#$\".\".scale.x = scal
+	#$\".\".scale.y = scal
+	
+	var combo_tile_width = 0
+	for tile in $\".\".get_children():
+		combo_tile_width += tile.aspect_ratio_x
+	for tile in $\".\".get_children():
+		tile.custom_minimum_size.x = tile.aspect_ratio_x * (w / combo_tile_width)
+		if 1 * (w / combo_tile_width) >= w && n <= 4:
+			tile.custom_minimum_size.x = tile.aspect_ratio_x * (w / (combo_tile_width / (0.4 + (0.1*n))))
+"
 
 [node name="HBox" type="HBoxContainer"]
 offset_right = 40.0
 offset_bottom = 40.0
 theme_override_constants/separation = 0
-script = ExtResource("1_amxta")
+script = SubResource("GDScript_v5ivf")
 
 [connection signal="resized" from="." to="." method="resized"]
