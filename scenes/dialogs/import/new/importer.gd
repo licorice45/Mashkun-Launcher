@@ -30,5 +30,5 @@ func _on_close_requested():
 	$".".queue_free()
 
 func _on_input_text_submitted(new_text):
-	if $Margin/Container/BtnLoad.disabled != true:
+	if $Margin/Container/BtnAdd.disabled != true:
 		_on_button_pressed()
