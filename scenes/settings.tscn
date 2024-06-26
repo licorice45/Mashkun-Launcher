@@ -1,10 +1,13 @@
-[gd_scene format=3 uid="uid://o46e1pk8uo4k"]
+[gd_scene load_steps=2 format=3 uid="uid://o46e1pk8uo4k"]
+
+[ext_resource type="Script" path="res://scenes/settings.gd" id="1_ckpmq"]
 
 [node name="Window" type="Window"]
 title = "Settings"
 initial_position = 2
 size = Vector2i(772, 720)
 min_size = Vector2i(772, 480)
+script = ExtResource("1_ckpmq")
 
 [node name="Margin" type="MarginContainer" parent="."]
 anchors_preset = 15
@@ -88,7 +91,7 @@ layout_mode = 2
 button_pressed = true
 text = "Game Info Panel on Left"
 
-[node name="CheckButton" type="CheckButton" parent="Margin/Container/Settings/PanelContainer/Scroll/Margin/Container/General/Margin/Container"]
+[node name="BtnColorFade" type="CheckButton" parent="Margin/Container/Settings/PanelContainer/Scroll/Margin/Container/General/Margin/Container"]
 layout_mode = 2
 button_pressed = true
 text = "Background Color fade in Animation"
@@ -146,3 +149,6 @@ theme_override_constants/margin_bottom = 8
 layout_mode = 2
 focus_neighbor_top = NodePath("../../../Settings/PanelContainer/Scroll/Margin/Container/General/Margin/Container/BtnPanelRight")
 text = "Save"
+
+[connection signal="close_requested" from="." to="." method="_on_close_requested"]
+[connection signal="pressed" from="Margin/Container/Save/Margin/Button" to="." method="_on_button_pressed"]

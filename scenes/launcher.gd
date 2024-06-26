@@ -10,6 +10,15 @@ func _ready():
 	reload_data()
 	$Split/Preview/Container/Buttons/Menu.get_popup().id_pressed.connect(self.btn_context_id_pressed)
 	$Split/TilesList/Menu/BtnAdd.get_popup().id_pressed.connect(self.btn_add_id_pressed)
+	reload_settings()
+
+func reload_settings():
+	await UserSettings.load_settings()
+	if UserSettings.panel_on_left == true:
+		$Split.move_child($Split/Preview, 0)
+	else:
+		$Split.move_child($Split/Preview, 1)
+
 
 func reload_data(): # Reloads all tiles and loads their metadata
 	var img = Image.new()
@@ -135,8 +144,10 @@ func tile_click(tile):
 	save_reorder()
 
 func reload_theme():
-	var tween = get_tree().create_tween()
-	tween.tween_property($Background, "color", Color(current_tile.metadata["color"][0]), 0.5)
+	if UserSettings.color_fade == true:
+		get_tree().create_tween().tween_property($Background, "color", Color(current_tile.metadata["color"][0]), 0.5)
+	else:
+		$Background.color = Color(current_tile.metadata["color"][0])
 	
 	$Split/Preview/Container/Name.add_theme_color_override("font_color", current_tile.metadata["color"][2])
 	$Split/Preview/Container/Data/Description/Margin/Container/Scroll/Description.add_theme_color_override("font_color", current_tile.metadata["color"][2])
@@ -208,8 +219,8 @@ func resized():
 
 
 func _on_button_pressed():
-	if current_tile["command"] == "steam" && OS.get_name() == "Windows":
-		current_tile["command"] = "C:/Program Files (x86)/Steam/steam.exe"
+	if current_tile["command"] == "steam":
+		current_tile["command"] = UserSettings.windows_steam_directory
 	OS.create_process(current_tile["command"], current_tile["arguments"])
 	print("Attempting to launching: " + current_tile["command"] + " " + str(current_tile["arguments"]))
 	$AudioStreamPlayer.stream = load("res://assets/sfx/confirmation.ogg")
@@ -221,6 +232,8 @@ func btn_context_id_pressed(id):
 			var dialog = load("res://scenes/dialogs/metadata_editor.tscn").instantiate()
 			dialog.namer = current_tile.metadata["name"]
 			dialog.filename = current_tile.filename
+			if current_tile.metadata.has("description"):
+				dialog.description = current_tile.metadata["description"]
 			if current_tile.metadata.has("tags"):
 				dialog.tags = {}
 				if current_tile.metadata["tags"].has("genre"):
