@@ -34,6 +34,7 @@ placeholder_text = "Folder Name"
 
 [node name="BtnAdd" type="Button" parent="Margin/Container"]
 layout_mode = 2
+disabled = true
 text = "Add"
 
 [connection signal="close_requested" from="." to="." method="_on_close_requested"]

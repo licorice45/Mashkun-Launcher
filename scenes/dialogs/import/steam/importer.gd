@@ -101,7 +101,6 @@ func _on_close_requested():
 		$".".queue_free()
 
 func results_update():
-	
 	download_progress += 1
 	$Margin/Container/Label.text = "Progress: (" + str(download_progress) + "/4)"
 	if download_progress >= 3:

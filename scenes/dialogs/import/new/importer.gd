@@ -18,6 +18,8 @@ func _on_button_pressed():
 	$".".queue_free()
 
 func _input_changed(new_text):
+	if new_text.contains("/") ||  new_text.contains("<") ||  new_text.contains(">") ||  new_text.contains(":") ||  new_text.contains("\"") ||  new_text.contains("\\") ||  new_text.contains("|") ||  new_text.contains("?") ||  new_text.contains("*"):
+		$Margin/Container/Input.text = new_text.replace("/", "").replace("<", "").replace(">", "").replace(":", "").replace("\"", "").replace("\\", "").replace("|", "").replace("?", "").replace("*", "")
 	if new_text != "":
 		$Margin/Container/BtnAdd.disabled = false
 	else:
