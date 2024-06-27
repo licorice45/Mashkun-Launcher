@@ -6,7 +6,8 @@
 [node name="Info" type="Window"]
 title = "Info"
 initial_position = 2
-size = Vector2i(690, 405)
+size = Vector2i(690, 720)
+min_size = Vector2i(690, 405)
 theme = ExtResource("1_rwp6q")
 script = ExtResource("2_atjka")
 
@@ -29,9 +30,10 @@ theme_override_constants/separation = 8
 [node name="List" type="ItemList" parent="Margin/Container"]
 custom_minimum_size = Vector2(192, 0)
 layout_mode = 2
-item_count = 2
-item_0/text = "Importing Metadata"
-item_1/text = "Credits"
+item_count = 3
+item_0/text = "Basic Overview"
+item_1/text = "Importing Metadata"
+item_2/text = "Credits"
 
 [node name="Text" type="PanelContainer" parent="Margin/Container"]
 layout_mode = 2

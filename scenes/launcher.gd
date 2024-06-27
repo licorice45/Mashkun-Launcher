@@ -228,7 +228,7 @@ func resize_tiles():
 
 
 func _input(event):
-	if Input.is_action_pressed("help_screen"):
+	if Input.is_action_just_pressed("help_screen"):
 		$".".add_child(load("res://scenes/dialogs/info.tscn").instantiate())
 	if Input.is_action_just_pressed("refresh"):
 		reload_data()
