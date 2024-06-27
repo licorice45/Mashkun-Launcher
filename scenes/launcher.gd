@@ -90,6 +90,8 @@ func reload_data(): # Reloads all tiles and loads their metadata
 		resize_tiles()
 	if $Split/TilesList/Scroll/Container.get_child(last_tile_position.y).get_child(last_tile_position.x) != null:
 		tile_click($Split/TilesList/Scroll/Container.get_child(last_tile_position.y).get_child(last_tile_position.x))
+	$Split/Preview/Container/Buttons/Launch.disabled = true
+	$Split/Preview/Container/Buttons/Menu.disabled = true
 
 func tile_click(tile):
 	current_tile = tile
@@ -132,6 +134,8 @@ func tile_click(tile):
 		$Split/Preview/Container/Buttons/Launch.disabled = true
 	else:
 		$Split/Preview/Container/Buttons/Launch.disabled = false
+	
+	$Split/Preview/Container/Buttons/Menu.disabled = false
 	
 	reload_theme()
 	save_reorder()

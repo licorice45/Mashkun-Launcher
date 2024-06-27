@@ -1,5 +1,5 @@
 extends Window
-@onready var input = $Margin/Container/Input
+@onready var input = $Margin/Container/FolderName/Margin/Container/Input
 
 func _on_button_pressed():
 	input.editable = false
@@ -19,7 +19,7 @@ func _on_button_pressed():
 
 func _input_changed(new_text):
 	if new_text.contains("/") ||  new_text.contains("<") ||  new_text.contains(">") ||  new_text.contains(":") ||  new_text.contains("\"") ||  new_text.contains("\\") ||  new_text.contains("|") ||  new_text.contains("?") ||  new_text.contains("*"):
-		$Margin/Container/Input.text = new_text.replace("/", "").replace("<", "").replace(">", "").replace(":", "").replace("\"", "").replace("\\", "").replace("|", "").replace("?", "").replace("*", "")
+		input.text = new_text.replace("/", "").replace("<", "").replace(">", "").replace(":", "").replace("\"", "").replace("\\", "").replace("|", "").replace("?", "").replace("*", "")
 	if new_text != "":
 		$Margin/Container/BtnAdd.disabled = false
 	else:
