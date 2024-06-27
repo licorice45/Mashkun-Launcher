@@ -124,17 +124,7 @@ layout_mode = 2
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Save" type="PanelContainer" parent="Margin/Container"]
-layout_mode = 2
-
-[node name="Margin" type="MarginContainer" parent="Margin/Container/Save"]
-layout_mode = 2
-theme_override_constants/margin_left = 8
-theme_override_constants/margin_top = 8
-theme_override_constants/margin_right = 8
-theme_override_constants/margin_bottom = 8
-
-[node name="BtnSave" type="Button" parent="Margin/Container/Save/Margin"]
+[node name="BtnSave" type="Button" parent="Margin/Container"]
 layout_mode = 2
 text = "Save"
 
@@ -154,5 +144,5 @@ use_native_dialog = true
 [connection signal="text_changed" from="Margin/Container/AdvancedCommand/Margin/Container/Label" to="." method="_on_command_changed"]
 [connection signal="text_changed" from="Margin/Container/AdvancedCommand/Margin/Container/Args" to="." method="_on_args_changed"]
 [connection signal="text_changed" from="Margin/Container/Steam/Margin/Container/SteamGame" to="." method="_on_steam_game_text_changed"]
-[connection signal="pressed" from="Margin/Container/Save/Margin/BtnSave" to="." method="_on_btn_save_pressed"]
+[connection signal="pressed" from="Margin/Container/BtnSave" to="." method="_on_btn_save_pressed"]
 [connection signal="file_selected" from="FileDialog" to="." method="_on_file_dialog_file_selected"]

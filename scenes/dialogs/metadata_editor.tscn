@@ -59,10 +59,7 @@ size_flags_vertical = 3
 
 [node name="Margin" type="MarginContainer" parent="Margin/Container/Description"]
 layout_mode = 2
-theme_override_constants/margin_left = 8
 theme_override_constants/margin_top = 8
-theme_override_constants/margin_right = 8
-theme_override_constants/margin_bottom = 8
 
 [node name="Container" type="VBoxContainer" parent="Margin/Container/Description/Margin"]
 layout_mode = 2

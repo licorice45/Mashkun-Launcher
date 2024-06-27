@@ -113,22 +113,12 @@ file_mode = 0
 access = 2
 use_native_dialog = true
 
-[node name="Save" type="PanelContainer" parent="Margin/Container"]
+[node name="BtnSave" type="Button" parent="Margin/Container"]
 layout_mode = 2
-
-[node name="Margin" type="MarginContainer" parent="Margin/Container/Save"]
-layout_mode = 2
-theme_override_constants/margin_left = 8
-theme_override_constants/margin_top = 8
-theme_override_constants/margin_right = 8
-theme_override_constants/margin_bottom = 8
-
-[node name="Button" type="Button" parent="Margin/Container/Save/Margin"]
-layout_mode = 2
-focus_neighbor_top = NodePath("../../../Scroll/Container/General/Margin/Container/BtnPanelLeft")
+focus_neighbor_top = NodePath("../Scroll/Container/General/Margin/Container/BtnPanelLeft")
 text = "Save"
 
 [connection signal="close_requested" from="." to="." method="_on_close_requested"]
 [connection signal="pressed" from="Margin/Container/Scroll/Container/Command/Margin/Container/SteamDirectory/BtnDialog" to="." method="_on_btn_dialog_pressed"]
 [connection signal="file_selected" from="Margin/Container/Scroll/Container/Command/Margin/Container/SteamDirectory/BtnDialog/FileDialog" to="." method="_on_file_dialog_file_selected"]
-[connection signal="pressed" from="Margin/Container/Save/Margin/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="Margin/Container/BtnSave" to="." method="_on_button_pressed"]
