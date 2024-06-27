@@ -1,0 +1,58 @@
+[gd_scene load_steps=3 format=3 uid="uid://bfsmbg15adkqf"]
+
+[ext_resource type="Theme" uid="uid://bhifb0ujxayun" path="res://assets/themes/dialog.tres" id="1_rwp6q"]
+[ext_resource type="Script" path="res://scenes/dialogs/info.gd" id="2_atjka"]
+
+[node name="Info" type="Window"]
+title = "Info"
+initial_position = 2
+size = Vector2i(690, 405)
+theme = ExtResource("1_rwp6q")
+script = ExtResource("2_atjka")
+
+[node name="Margin" type="MarginContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="Container" type="HBoxContainer" parent="Margin"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="List" type="ItemList" parent="Margin/Container"]
+custom_minimum_size = Vector2(192, 0)
+layout_mode = 2
+item_count = 2
+item_0/text = "Importing Metadata"
+item_1/text = "Credits"
+
+[node name="Text" type="PanelContainer" parent="Margin/Container"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Margin" type="MarginContainer" parent="Margin/Container/Text"]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Margin/Container/Text/Margin"]
+layout_mode = 2
+horizontal_scroll_mode = 0
+
+[node name="Label" type="RichTextLabel" parent="Margin/Container/Text/Margin/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+bbcode_enabled = true
+
+[connection signal="close_requested" from="." to="." method="_on_close_requested"]
+[connection signal="item_selected" from="Margin/Container/List" to="." method="_on_list_item_selected"]

@@ -227,6 +227,12 @@ func resize_tiles():
 				tile.custom_minimum_size.x = tile.aspect_ratio_x * (w / (combo_tile_width / (0.4 + (0.1*(n + 1)))))
 
 
+func _input(event):
+	if Input.is_action_pressed("help_screen"):
+		$".".add_child(load("res://scenes/dialogs/info.tscn").instantiate())
+	if Input.is_action_just_pressed("refresh"):
+		reload_data()
+
 
 
 func _on_button_pressed():
