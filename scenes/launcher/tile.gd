@@ -16,6 +16,8 @@ func _ready():
 	aspect_ratio_x = $".".texture.get_size().x / $".".texture.get_size().y
 	if metadata != null:
 		$Button.tooltip_text = metadata["name"]
+		
+	
 
 func _on_mouse_entered():
 	hover = true

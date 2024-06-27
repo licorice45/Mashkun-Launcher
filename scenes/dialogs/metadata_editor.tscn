@@ -1,5 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://cvmjoui55urse"]
+[gd_scene load_steps=5 format=3 uid="uid://cvmjoui55urse"]
 
+[ext_resource type="Theme" uid="uid://bhifb0ujxayun" path="res://assets/themes/dialog.tres" id="1_2kcmd"]
 [ext_resource type="Script" path="res://scenes/dialogs/metadata_editor.gd" id="1_p8gtu"]
 [ext_resource type="Texture2D" uid="uid://iadtiyou2kc3" path="res://assets/textures/cover.png" id="1_q7ara"]
 [ext_resource type="Texture2D" uid="uid://2rqhv1kdol1o" path="res://assets/textures/bg.png" id="2_yvpnx"]
@@ -9,6 +10,7 @@ title = "Metadata Editor"
 initial_position = 2
 size = Vector2i(450, 832)
 min_size = Vector2i(450, 832)
+theme = ExtResource("1_2kcmd")
 script = ExtResource("1_p8gtu")
 
 [node name="Margin" type="MarginContainer" parent="."]

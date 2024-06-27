@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://duw1vgyewbo84"]
+[gd_scene load_steps=3 format=3 uid="uid://duw1vgyewbo84"]
 
 [ext_resource type="Script" path="res://scenes/dialogs/command_editor.gd" id="1_sjtgt"]
+[ext_resource type="Theme" uid="uid://bhifb0ujxayun" path="res://assets/themes/dialog.tres" id="1_sta0g"]
 
 [node name="CommandEditor" type="Window"]
 title = "Launch Command Editor"
@@ -8,6 +9,7 @@ initial_position = 2
 size = Vector2i(350, 230)
 min_size = Vector2i(350, 230)
 max_size = Vector2i(16384, 230)
+theme = ExtResource("1_sta0g")
 script = ExtResource("1_sjtgt")
 
 [node name="Margin" type="MarginContainer" parent="."]

@@ -1,9 +1,13 @@
 extends Window
 
+@onready var panel_on_left = $Margin/Container/Scroll/Container/General/Margin/Container/BtnPanelLeft
+@onready var color_fade = $Margin/Container/Scroll/Container/General/Margin/Container/BtnColorFade
+@onready var windows_steam_directory = $Margin/Container/Scroll/Container/Command/Margin/Container/SteamDirectory/Input
+
 func _ready():
-	$Margin/Container/Settings/PanelContainer/Scroll/Margin/Container/General/Margin/Container/BtnPanelRight.button_pressed = UserSettings.panel_on_left
-	$Margin/Container/Settings/PanelContainer/Scroll/Margin/Container/General/Margin/Container/BtnColorFade.button_pressed = UserSettings.color_fade
-	$Margin/Container/Settings/PanelContainer/Scroll/Margin/Container/Command/Margin/Container/SteamDirectory/Input.text = UserSettings.windows_steam_directory
+	panel_on_left.button_pressed = UserSettings.panel_on_left
+	color_fade.button_pressed = UserSettings.color_fade
+	windows_steam_directory.text = UserSettings.windows_steam_directory
 
 
 func _on_close_requested():
@@ -13,10 +17,18 @@ func _on_close_requested():
 
 func _on_button_pressed():
 	var results = {
-	"panel_on_left": $Margin/Container/Settings/PanelContainer/Scroll/Margin/Container/General/Margin/Container/BtnPanelRight.button_pressed,
-	"color_fade": $Margin/Container/Settings/PanelContainer/Scroll/Margin/Container/General/Margin/Container/BtnColorFade.button_pressed,
-	"windows_steam_directory": $Margin/Container/Settings/PanelContainer/Scroll/Margin/Container/Command/Margin/Container/SteamDirectory/Input.text
+	"panel_on_left": panel_on_left.button_pressed,
+	"color_fade": color_fade.button_pressed,
+	"windows_steam_directory": windows_steam_directory.text
 	}
 	
 	await UserSettings.save_settings(results)
 	get_tree().get_root().get_node("Launcher").reload_settings()
+
+
+func _on_btn_dialog_pressed():
+	$Margin/Container/Scroll/Container/Command/Margin/Container/SteamDirectory/BtnDialog/FileDialog.popup()
+
+
+func _on_file_dialog_file_selected(path):
+	windows_steam_directory.text = path

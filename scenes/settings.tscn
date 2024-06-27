@@ -1,12 +1,14 @@
-[gd_scene load_steps=2 format=3 uid="uid://o46e1pk8uo4k"]
+[gd_scene load_steps=3 format=3 uid="uid://o46e1pk8uo4k"]
 
 [ext_resource type="Script" path="res://scenes/settings.gd" id="1_ckpmq"]
+[ext_resource type="Theme" uid="uid://bhifb0ujxayun" path="res://assets/themes/dialog.tres" id="1_s2th2"]
 
 [node name="Window" type="Window"]
 title = "Settings"
 initial_position = 2
-size = Vector2i(772, 720)
-min_size = Vector2i(772, 480)
+size = Vector2i(512, 720)
+min_size = Vector2i(512, 512)
+theme = ExtResource("1_s2th2")
 script = ExtResource("1_ckpmq")
 
 [node name="Margin" type="MarginContainer" parent="."]
@@ -24,116 +26,92 @@ theme_override_constants/margin_bottom = 16
 layout_mode = 2
 theme_override_constants/separation = 8
 
-[node name="Settings" type="HBoxContainer" parent="Margin/Container"]
+[node name="Scroll" type="ScrollContainer" parent="Margin/Container"]
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_constants/separation = 8
-
-[node name="Categories" type="PanelContainer" parent="Margin/Container/Settings"]
-layout_mode = 2
-size_flags_horizontal = 0
-
-[node name="Margin" type="MarginContainer" parent="Margin/Container/Settings/Categories"]
-layout_mode = 2
-theme_override_constants/margin_left = 8
-theme_override_constants/margin_top = 8
-theme_override_constants/margin_right = 8
-theme_override_constants/margin_bottom = 8
-
-[node name="Input" type="ItemList" parent="Margin/Container/Settings/Categories/Margin"]
-custom_minimum_size = Vector2(128, 0)
-layout_mode = 2
-item_count = 2
-item_0/text = "General"
-item_1/text = "Command"
-
-[node name="PanelContainer" type="PanelContainer" parent="Margin/Container/Settings"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Scroll" type="ScrollContainer" parent="Margin/Container/Settings/PanelContainer"]
-layout_mode = 2
 horizontal_scroll_mode = 0
 
-[node name="Margin" type="MarginContainer" parent="Margin/Container/Settings/PanelContainer/Scroll"]
+[node name="Container" type="VBoxContainer" parent="Margin/Container/Scroll"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme_override_constants/separation = 8
+
+[node name="General" type="PanelContainer" parent="Margin/Container/Scroll/Container"]
+layout_mode = 2
+
+[node name="Margin" type="MarginContainer" parent="Margin/Container/Scroll/Container/General"]
+layout_mode = 2
 theme_override_constants/margin_left = 8
 theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 
-[node name="Container" type="VBoxContainer" parent="Margin/Container/Settings/PanelContainer/Scroll/Margin"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme_override_constants/separation = 8
-
-[node name="General" type="PanelContainer" parent="Margin/Container/Settings/PanelContainer/Scroll/Margin/Container"]
-layout_mode = 2
-
-[node name="Margin" type="MarginContainer" parent="Margin/Container/Settings/PanelContainer/Scroll/Margin/Container/General"]
-layout_mode = 2
-
-[node name="Container" type="VBoxContainer" parent="Margin/Container/Settings/PanelContainer/Scroll/Margin/Container/General/Margin"]
+[node name="Container" type="VBoxContainer" parent="Margin/Container/Scroll/Container/General/Margin"]
 layout_mode = 2
 theme_override_constants/separation = 8
 
-[node name="Label" type="Label" parent="Margin/Container/Settings/PanelContainer/Scroll/Margin/Container/General/Margin/Container"]
+[node name="Label" type="Label" parent="Margin/Container/Scroll/Container/General/Margin/Container"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.391819, 0.391819, 0.391819, 1)
 text = "General"
 horizontal_alignment = 1
 
-[node name="BtnPanelRight" type="CheckButton" parent="Margin/Container/Settings/PanelContainer/Scroll/Margin/Container/General/Margin/Container"]
+[node name="BtnPanelLeft" type="CheckButton" parent="Margin/Container/Scroll/Container/General/Margin/Container"]
 layout_mode = 2
 button_pressed = true
 text = "Game Info Panel on Left"
 
-[node name="BtnColorFade" type="CheckButton" parent="Margin/Container/Settings/PanelContainer/Scroll/Margin/Container/General/Margin/Container"]
+[node name="BtnColorFade" type="CheckButton" parent="Margin/Container/Scroll/Container/General/Margin/Container"]
 layout_mode = 2
 button_pressed = true
 text = "Background Color fade in Animation"
 
-[node name="Command" type="PanelContainer" parent="Margin/Container/Settings/PanelContainer/Scroll/Margin/Container"]
+[node name="Command" type="PanelContainer" parent="Margin/Container/Scroll/Container"]
 layout_mode = 2
 
-[node name="Margin" type="MarginContainer" parent="Margin/Container/Settings/PanelContainer/Scroll/Margin/Container/Command"]
+[node name="Margin" type="MarginContainer" parent="Margin/Container/Scroll/Container/Command"]
 layout_mode = 2
 theme_override_constants/margin_left = 8
 theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 
-[node name="Container" type="VBoxContainer" parent="Margin/Container/Settings/PanelContainer/Scroll/Margin/Container/Command/Margin"]
+[node name="Container" type="VBoxContainer" parent="Margin/Container/Scroll/Container/Command/Margin"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Margin/Container/Settings/PanelContainer/Scroll/Margin/Container/Command/Margin/Container"]
+[node name="Label" type="Label" parent="Margin/Container/Scroll/Container/Command/Margin/Container"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.389287, 0.389287, 0.389287, 1)
 text = "Command"
 horizontal_alignment = 1
 
-[node name="SteamDirectory" type="HBoxContainer" parent="Margin/Container/Settings/PanelContainer/Scroll/Margin/Container/Command/Margin/Container"]
+[node name="SteamDirectory" type="HBoxContainer" parent="Margin/Container/Scroll/Container/Command/Margin/Container"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Margin/Container/Settings/PanelContainer/Scroll/Margin/Container/Command/Margin/Container/SteamDirectory"]
+[node name="Label" type="Label" parent="Margin/Container/Scroll/Container/Command/Margin/Container/SteamDirectory"]
 layout_mode = 2
 text = "Steam Directory"
 
-[node name="Separator" type="Control" parent="Margin/Container/Settings/PanelContainer/Scroll/Margin/Container/Command/Margin/Container/SteamDirectory"]
+[node name="Separator" type="Control" parent="Margin/Container/Scroll/Container/Command/Margin/Container/SteamDirectory"]
 custom_minimum_size = Vector2(131, 0)
 layout_mode = 2
 
-[node name="Input" type="LineEdit" parent="Margin/Container/Settings/PanelContainer/Scroll/Margin/Container/Command/Margin/Container/SteamDirectory"]
+[node name="Input" type="LineEdit" parent="Margin/Container/Scroll/Container/Command/Margin/Container/SteamDirectory"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="BtnDialog" type="Button" parent="Margin/Container/Settings/PanelContainer/Scroll/Margin/Container/Command/Margin/Container/SteamDirectory"]
+[node name="BtnDialog" type="Button" parent="Margin/Container/Scroll/Container/Command/Margin/Container/SteamDirectory"]
 custom_minimum_size = Vector2(32, 0)
 layout_mode = 2
 text = "..."
+
+[node name="FileDialog" type="FileDialog" parent="Margin/Container/Scroll/Container/Command/Margin/Container/SteamDirectory/BtnDialog"]
+title = "Open a File"
+ok_button_text = "Open"
+file_mode = 0
+access = 2
+use_native_dialog = true
 
 [node name="Save" type="PanelContainer" parent="Margin/Container"]
 layout_mode = 2
@@ -147,8 +125,10 @@ theme_override_constants/margin_bottom = 8
 
 [node name="Button" type="Button" parent="Margin/Container/Save/Margin"]
 layout_mode = 2
-focus_neighbor_top = NodePath("../../../Settings/PanelContainer/Scroll/Margin/Container/General/Margin/Container/BtnPanelRight")
+focus_neighbor_top = NodePath("../../../Scroll/Container/General/Margin/Container/BtnPanelLeft")
 text = "Save"
 
 [connection signal="close_requested" from="." to="." method="_on_close_requested"]
+[connection signal="pressed" from="Margin/Container/Scroll/Container/Command/Margin/Container/SteamDirectory/BtnDialog" to="." method="_on_btn_dialog_pressed"]
+[connection signal="file_selected" from="Margin/Container/Scroll/Container/Command/Margin/Container/SteamDirectory/BtnDialog/FileDialog" to="." method="_on_file_dialog_file_selected"]
 [connection signal="pressed" from="Margin/Container/Save/Margin/Button" to="." method="_on_button_pressed"]

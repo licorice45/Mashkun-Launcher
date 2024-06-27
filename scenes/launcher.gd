@@ -87,14 +87,12 @@ func reload_data(): # Reloads all tiles and loads their metadata
 				hbox.add_child(tile)
 				grid_position.x += 1
 				tile.grid_position = grid_position
-				if grid_position == last_tile_position:
-					tile_click(tile)
-		
 		resize_tiles()
+	if $Split/TilesList/Scroll/Container.get_child(last_tile_position.y).get_child(last_tile_position.x) != null:
+		tile_click($Split/TilesList/Scroll/Container.get_child(last_tile_position.y).get_child(last_tile_position.x))
 
 func tile_click(tile):
 	current_tile = tile
-	tile.release_focus()
 	print("Clicked tile at: " + str(tile.grid_position))
 	
 	$Split/Preview/Container/Name.text = tile.metadata["name"]
