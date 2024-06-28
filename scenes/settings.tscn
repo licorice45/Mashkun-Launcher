@@ -126,7 +126,7 @@ layout_mode = 2
 text = "Web Browser Command"
 
 [node name="Separator" type="Control" parent="Margin/Container/Scroll/Container/Command/Margin/Container/WebDirectory"]
-custom_minimum_size = Vector2(131, 0)
+custom_minimum_size = Vector2(70, 0)
 layout_mode = 2
 
 [node name="Input" type="LineEdit" parent="Margin/Container/Scroll/Container/Command/Margin/Container/WebDirectory"]

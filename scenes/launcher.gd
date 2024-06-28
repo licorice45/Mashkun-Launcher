@@ -170,6 +170,12 @@ func reload_theme():
 	$Split/Preview/Container/Name.add_theme_color_override("font_color", current_tile.metadata["color"][2])
 	$Split/Preview/Container/Data/Description/Margin/Container/Scroll/Description.add_theme_color_override("font_color", current_tile.metadata["color"][2])
 	
+	$Split/TilesList/ClassicList.add_theme_color_override("font_color", current_tile.metadata["color"][2])
+	var color2_light = Color(current_tile.metadata["color"][2])
+	color2_light.v = 1.5
+	$Split/TilesList/ClassicList.add_theme_color_override("font_hovered_color", color2_light)
+	
+	
 	var themer = load("res://assets/themes/launcher.tres")
 	var stylebox = StyleBoxFlat.new()
 	var stylebox_dark = StyleBoxFlat.new()
