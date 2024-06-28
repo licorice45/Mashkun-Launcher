@@ -2,12 +2,14 @@ extends Window
 
 @onready var panel_on_left = $Margin/Container/Scroll/Container/General/Margin/Container/BtnPanelLeft
 @onready var color_fade = $Margin/Container/Scroll/Container/General/Margin/Container/BtnColorFade
+@onready var classic_list = $Margin/Container/Scroll/Container/General/Margin/Container/BtnClassicList
 @onready var windows_steam_directory = $Margin/Container/Scroll/Container/Command/Margin/Container/SteamDirectory/Input
 @onready var web_directory = $Margin/Container/Scroll/Container/Command/Margin/Container/WebDirectory/Input
 
 func _ready():
 	panel_on_left.button_pressed = UserSettings.panel_on_left
 	color_fade.button_pressed = UserSettings.color_fade
+	classic_list.button_pressed = UserSettings.classic_list
 	windows_steam_directory.text = UserSettings.windows_steam_directory
 	web_directory.text = UserSettings.web_directory
 
@@ -27,6 +29,7 @@ func _on_btn_apply_pressed():
 	var results = {
 	"panel_on_left": panel_on_left.button_pressed,
 	"color_fade": color_fade.button_pressed,
+	"classic_list": classic_list.button_pressed,
 	"windows_steam_directory": windows_steam_directory.text,
 	"web_directory": web_directory.text
 	}
@@ -38,3 +41,5 @@ func _on_btn_apply_pressed():
 func _on_btn_save_pressed():
 	await _on_btn_apply_pressed()
 	_on_close_requested()
+
+

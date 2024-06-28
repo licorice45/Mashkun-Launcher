@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://of14jsxj65s8"]
+[gd_scene load_steps=9 format=3 uid="uid://of14jsxj65s8"]
 
 [ext_resource type="Script" path="res://scenes/launcher.gd" id="1_l6onj"]
 [ext_resource type="Texture2D" uid="uid://2rqhv1kdol1o" path="res://assets/textures/bg.png" id="2_qf0mr"]
@@ -11,6 +11,8 @@ bg_color = Color(0, 0, 0, 0.176471)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jd87x"]
 bg_color = Color(0, 0, 0, 0.176471)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_mspc7"]
 
 [node name="Launcher" type="Control"]
 layout_mode = 3
@@ -225,6 +227,18 @@ grow_vertical = 2
 layout_mode = 2
 theme_override_constants/separation = 0
 
+[node name="ClassicList" type="ItemList" parent="Split/TilesList"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 56.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_mspc7")
+fixed_icon_size = Vector2i(64, 64)
+
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 
 [node name="Dialogs" type="Node" parent="."]
@@ -240,3 +254,4 @@ that tile?"
 [connection signal="resized" from="Split/TilesList" to="." method="resized"]
 [connection signal="text_submitted" from="Split/TilesList/Menu/Filter" to="." method="_on_line_edit_text_submitted"]
 [connection signal="pressed" from="Split/TilesList/Menu/BtnSettings" to="." method="_on_btn_settings_pressed"]
+[connection signal="item_selected" from="Split/TilesList/ClassicList" to="." method="_on_classic_list_item_selected"]

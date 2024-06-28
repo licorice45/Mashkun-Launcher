@@ -18,6 +18,13 @@ func reload_settings():
 		$Split.move_child($Split/Preview, 0)
 	else:
 		$Split.move_child($Split/Preview, 1)
+	
+	if UserSettings.classic_list == true:
+		$Split/TilesList/Scroll.visible = false
+		$Split/TilesList/ClassicList.visible = true
+	else:
+		$Split/TilesList/Scroll.visible = true
+		$Split/TilesList/ClassicList.visible = false
 
 
 func reload_data(): # Reloads all tiles and loads their metadata
@@ -34,11 +41,14 @@ func reload_data(): # Reloads all tiles and loads their metadata
 	for row in $Split/TilesList/Scroll/Container.get_children():
 		row.queue_free()
 	
+	$Split/TilesList/ClassicList.clear()
+	
 	if FileAccess.file_exists("user://data/order.json") == false:
 		var order = FileAccess.open("user://data/order.json", FileAccess.WRITE)
 		order.store_line("[[]]")
 		order.close()
 	var order = JSON.parse_string(FileAccess.get_file_as_string("user://data/order.json"))
+	var classic_position = 0
 	for row_data in order:
 		var hbox = HBoxContainer.new()
 		hbox.add_theme_constant_override("separation", 0)
@@ -61,13 +71,18 @@ func reload_data(): # Reloads all tiles and loads their metadata
 				tile.command = ""
 			
 			tile.filename = tile_data
+			tile.classic_position = classic_position
+			
+			$Split/TilesList/ClassicList.add_item(tile.metadata["name"]) #Classic list
 			
 			
 			var cover = "user://data/" + tile_data + "/cover.png"
 			if img.load_from_file(cover) == null:
 				tile.texture = load("res://assets/textures/cover.png")
+				$Split/TilesList/ClassicList.set_item_icon(classic_position, load("res://assets/textures/cover.png")) #Classic list
 			else:
 				tile.texture = imtx.create_from_image(img.load_from_file(cover))
+				$Split/TilesList/ClassicList.set_item_icon(classic_position, imtx.create_from_image(img.load_from_file(cover))) #Classic list
 			
 			var bg = "user://data/" + tile_data + "/bg.png"
 			if img.load_from_file(bg) == null:
@@ -87,6 +102,12 @@ func reload_data(): # Reloads all tiles and loads their metadata
 				hbox.add_child(tile)
 				grid_position.x += 1
 				tile.grid_position = grid_position
+			else:
+				$Split/TilesList/ClassicList.remove_item(classic_position) #Classic list
+				classic_position += -1
+			
+			classic_position += 1 #Classic list
+			
 		resize_tiles()
 	if $Split/TilesList/Scroll/Container.get_child(last_tile_position.y).get_child(last_tile_position.x) != null:
 		tile_click($Split/TilesList/Scroll/Container.get_child(last_tile_position.y).get_child(last_tile_position.x))
@@ -312,3 +333,14 @@ func _on_line_edit_text_submitted(new_text):
 
 func _on_btn_settings_pressed():
 	$".".add_child(load("res://scenes/settings.tscn").instantiate())
+
+
+func _on_classic_list_item_selected(index):
+	for row in $Split/TilesList/Scroll/Container.get_children():
+		for tile in row.get_children():
+			if tile.classic_position == index:
+				tile_click(tile)
+				var noise = $AudioStreamPlayer
+				if noise.playing != true:
+					noise.stream = load("res://assets/sfx/glass.ogg")
+					noise.play()

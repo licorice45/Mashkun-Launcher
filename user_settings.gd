@@ -2,12 +2,14 @@ extends Node
 
 var panel_on_left
 var color_fade
+var classic_list
 var windows_steam_directory
 var web_directory
 
 var defaults = {
 	"panel_on_left": true,
 	"color_fade": true,
+	"classic_list": false,
 	"windows_steam_directory": "steam",
 	"web_directory": "start"
 }
@@ -17,6 +19,7 @@ func load_settings():
 		var data = JSON.parse_string(FileAccess.get_file_as_string("user://settings.json"))
 		panel_on_left = data["panel_on_left"]
 		color_fade = data["color_fade"]
+		classic_list = data["classic_list"]
 		windows_steam_directory = data["windows_steam_directory"]
 		web_directory = data["web_directory"]
 	else:
@@ -32,6 +35,7 @@ func save_settings(data):
 	var export_metadata = "{
 	\"panel_on_left\": "+ str(data["panel_on_left"]) +",
 	\"color_fade\": "+ str(data["color_fade"]) +",
+	\"classic_list\": "+ str(data["classic_list"]) +",
 	\"windows_steam_directory\": \""+ data["windows_steam_directory"] +"\",
 	\"web_directory\": \""+ data["web_directory"] +"\"
 }"

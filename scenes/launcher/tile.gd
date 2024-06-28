@@ -4,6 +4,7 @@ var hover = false
 
 var filename
 var grid_position
+var classic_position
 
 var command
 var arguments
