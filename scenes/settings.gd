@@ -3,11 +3,13 @@ extends Window
 @onready var panel_on_left = $Margin/Container/Scroll/Container/General/Margin/Container/BtnPanelLeft
 @onready var color_fade = $Margin/Container/Scroll/Container/General/Margin/Container/BtnColorFade
 @onready var windows_steam_directory = $Margin/Container/Scroll/Container/Command/Margin/Container/SteamDirectory/Input
+@onready var web_directory = $Margin/Container/Scroll/Container/Command/Margin/Container/WebDirectory/Input
 
 func _ready():
 	panel_on_left.button_pressed = UserSettings.panel_on_left
 	color_fade.button_pressed = UserSettings.color_fade
 	windows_steam_directory.text = UserSettings.windows_steam_directory
+	web_directory.text = UserSettings.web_directory
 
 
 func _on_close_requested():
@@ -25,7 +27,8 @@ func _on_btn_apply_pressed():
 	var results = {
 	"panel_on_left": panel_on_left.button_pressed,
 	"color_fade": color_fade.button_pressed,
-	"windows_steam_directory": windows_steam_directory.text
+	"windows_steam_directory": windows_steam_directory.text,
+	"web_directory": web_directory.text
 	}
 	
 	await UserSettings.save_settings(results)

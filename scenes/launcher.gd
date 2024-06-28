@@ -238,6 +238,8 @@ func _input(event):
 func _on_button_pressed():
 	if current_tile["command"] == "steam":
 		current_tile["command"] = UserSettings.windows_steam_directory
+	if current_tile["command"] == "web":
+		current_tile["command"] = UserSettings.web_directory
 	OS.create_process(current_tile["command"], current_tile["arguments"])
 	print("Attempting to launching: " + current_tile["command"] + " " + str(current_tile["arguments"]))
 	$AudioStreamPlayer.stream = load("res://assets/sfx/confirmation.ogg")

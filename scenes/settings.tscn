@@ -113,6 +113,21 @@ file_mode = 0
 access = 2
 use_native_dialog = true
 
+[node name="WebDirectory" type="HBoxContainer" parent="Margin/Container/Scroll/Container/Command/Margin/Container"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Margin/Container/Scroll/Container/Command/Margin/Container/WebDirectory"]
+layout_mode = 2
+text = "Web Browser Command"
+
+[node name="Separator" type="Control" parent="Margin/Container/Scroll/Container/Command/Margin/Container/WebDirectory"]
+custom_minimum_size = Vector2(131, 0)
+layout_mode = 2
+
+[node name="Input" type="LineEdit" parent="Margin/Container/Scroll/Container/Command/Margin/Container/WebDirectory"]
+layout_mode = 2
+size_flags_horizontal = 3
+
 [node name="Buttons" type="HBoxContainer" parent="Margin/Container"]
 layout_mode = 2
 

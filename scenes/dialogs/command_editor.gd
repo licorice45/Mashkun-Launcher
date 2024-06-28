@@ -10,6 +10,7 @@ func _on_btn_option_item_selected(index):
 	$Margin/Container/Directory.visible = false
 	$Margin/Container/AdvancedCommand.visible = false
 	$Margin/Container/Steam.visible = false
+	$Margin/Container/Website.visible = false
 	
 	match index:
 		1:
@@ -25,7 +26,12 @@ func _on_btn_option_item_selected(index):
 		3:
 			$Margin/Container/Steam.visible = true
 			
-			$Margin/Container/Steam/Margin/Container/SteamGame.text = args[1]
+			if args.has(1) && command == "steam":
+				$Margin/Container/Steam/Margin/Container/SteamGame.text = args[1]
+		4:
+			$Margin/Container/Website.visible = true
+			
+			$Margin/Container/Website/Margin/Website.text = parse_args_to_str()
 
 func  parse_args_to_str():
 	var result = ""
@@ -77,5 +83,12 @@ func _on_btn_save_pressed():
 func _on_steam_game_text_changed(new_text):
 	command = "steam"
 	args = ["-applaunch", str(new_text)]
-	print("New Command: " + command)
+	print("New Command: " + UserSettings.windows_steam_directory)
+	print("New Args: " + str(args))
+
+
+func _on_website_text_changed(new_text):
+	command = "web"
+	args = [$Margin/Container/Website/Margin/Website.text]
+	print("New Command: " + UserSettings.web_directory)
 	print("New Args: " + str(args))
