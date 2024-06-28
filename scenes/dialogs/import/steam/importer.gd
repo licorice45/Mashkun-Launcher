@@ -1,9 +1,15 @@
 extends Window
-@onready var input = $Margin/Container/Input
+@onready var input = $Margin/Container/SteamGameID/Margin/Container/Input
 var namer
 var date
 var publisher
 var download_progress = 0
+
+
+
+func _on_close_requested():
+	if input.editable == true:
+		$".".queue_free()
 
 func _on_button_pressed():
 	input.editable = false
@@ -12,7 +18,7 @@ func _on_button_pressed():
 	$HTTP/title.request("https://steamcdn-a.akamaihd.net/steam/apps/"+input.text+"/logo.png")
 	$HTTP/cover.request("https://steamcdn-a.akamaihd.net/steam/apps/"+input.text+"/library_600x900.jpg")
 	$HTTP/bg.request("https://steamcdn-a.akamaihd.net/steam/apps/"+input.text+"/library_hero.jpg")
-	$Margin/Container/Label.text = "Progress: (0/4)"
+	$Margin/Container/SteamGameID/Margin/Container/Label.text = "Progress: (0/4)"
 
 func _on_line_edit_text_changed(new_text):
 	if new_text != "":
@@ -30,23 +36,28 @@ func download(result, body, ispng):
 
 func title_request_done(result, response_code, headers, body):
 	var img = download(result, body, true)
-	img.save_png("user://data/" + input.text + "/title.png")
+	if img != null:
+		img.save_png("user://data/" + input.text + "/title.png")
 	results_update()
 
 
 func cover_request_done(result, response_code, headers, body):
 	var img = download(result, body, false)
-	img.save_png("user://data/" + input.text + "/cover.png")
+	if img != null:
+		img.save_png("user://data/" + input.text + "/cover.png")
 	results_update()
 
 
 func bg_request_done(result, response_code, headers, body):
 	var img = download(result, body, false)
-	img.save_png("user://data/" + input.text + "/bg.png")
+	if img != null:
+		img.save_png("user://data/" + input.text + "/bg.png")
 	results_update()
 
 
 func steampage_request_done(result, response_code, headers, body):
+	if result != HTTPRequest.RESULT_SUCCESS:
+		push_error("Couldn't load data.")
 	var n = 0
 	var publisher_n = -1
 	for line in body.get_string_from_utf8().split("\n"):
@@ -96,13 +107,9 @@ func steampage_request_done(result, response_code, headers, body):
 	results_update()
 
 
-func _on_close_requested():
-	if input.editable == true:
-		$".".queue_free()
-
 func results_update():
 	download_progress += 1
-	$Margin/Container/Label.text = "Progress: (" + str(download_progress) + "/4)"
+	$Margin/Container/SteamGameID/Margin/Container/Label.text = "Progress: (" + str(download_progress) + "/4)"
 	if download_progress >= 3:
 		$HTTP/steampage.request("https://store.steampowered.com/app/"+input.text)
 	if download_progress >= 4:

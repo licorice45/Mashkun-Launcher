@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://of14jsxj65s8"]
+[gd_scene load_steps=8 format=3 uid="uid://of14jsxj65s8"]
 
 [ext_resource type="Script" path="res://scenes/launcher.gd" id="1_l6onj"]
 [ext_resource type="Texture2D" uid="uid://2rqhv1kdol1o" path="res://assets/textures/bg.png" id="2_qf0mr"]
 [ext_resource type="Texture2D" uid="uid://cr1n3kfkvnyu4" path="res://assets/textures/title.png" id="3_tlowq"]
 [ext_resource type="Theme" uid="uid://d4kh4u5ncgyoa" path="res://assets/themes/launcher.tres" id="4_ic76o"]
+[ext_resource type="Theme" uid="uid://bhifb0ujxayun" path="res://assets/themes/dialog.tres" id="5_fsim3"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_re0hb"]
 bg_color = Color(0, 0, 0, 0.176471)
@@ -98,7 +99,7 @@ layout_mode = 2
 
 [node name="Label" type="Label" parent="Split/Preview/Container/Data/Description/Margin/Container"]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.172549, 0.466667, 0.858824, 1)
+theme_override_colors/font_color = Color(0.686275, 0.686275, 0.686275, 1)
 text = "Description"
 
 [node name="Scroll" type="ScrollContainer" parent="Split/Preview/Container/Data/Description/Margin/Container"]
@@ -189,6 +190,7 @@ theme_override_constants/separation = 8
 [node name="Filter" type="LineEdit" parent="Split/TilesList/Menu"]
 layout_mode = 2
 size_flags_horizontal = 3
+theme = ExtResource("5_fsim3")
 
 [node name="BtnAdd" type="MenuButton" parent="Split/TilesList/Menu"]
 custom_minimum_size = Vector2(48, 48)
@@ -198,7 +200,7 @@ theme = ExtResource("4_ic76o")
 text = "+"
 flat = false
 item_count = 2
-popup/item_0/text = "Add Blank Tile"
+popup/item_0/text = "Add a new Game"
 popup/item_0/id = 0
 popup/item_1/text = "Import from Steam"
 popup/item_1/id = 1
