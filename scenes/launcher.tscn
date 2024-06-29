@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://of14jsxj65s8"]
+[gd_scene load_steps=13 format=3 uid="uid://of14jsxj65s8"]
 
 [ext_resource type="Script" path="res://scripts/launcher.gd" id="1_l6onj"]
 [ext_resource type="Texture2D" uid="uid://2rqhv1kdol1o" path="res://assets/textures/bg.png" id="2_qf0mr"]
 [ext_resource type="Texture2D" uid="uid://cr1n3kfkvnyu4" path="res://assets/textures/title.png" id="3_tlowq"]
 [ext_resource type="Theme" uid="uid://d4kh4u5ncgyoa" path="res://assets/themes/launcher.tres" id="4_ic76o"]
 [ext_resource type="Theme" uid="uid://bhifb0ujxayun" path="res://assets/themes/dialog.tres" id="5_fsim3"]
+[ext_resource type="Texture2D" uid="uid://lgqg3vy7xmge" path="res://assets/textures/logo.png" id="6_s08nj"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_re0hb"]
 bg_color = Color(0, 0, 0, 0.176471)
@@ -13,6 +14,69 @@ bg_color = Color(0, 0, 0, 0.176471)
 bg_color = Color(0, 0, 0, 0.176471)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_mspc7"]
+
+[sub_resource type="Animation" id="Animation_tto3k"]
+resource_name = "a"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_gi7pg"]
+resource_name = "start_up"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(2.21914, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xxllq"]
+_data = {
+"a": SubResource("Animation_tto3k"),
+"start_up": SubResource("Animation_gi7pg")
+}
 
 [node name="Launcher" type="Control"]
 layout_mode = 3
@@ -189,13 +253,6 @@ offset_bottom = 48.0
 grow_horizontal = 2
 theme_override_constants/separation = 8
 
-[node name="BtnFilter" type="Button" parent="Split/TilesList/Menu"]
-visible = false
-custom_minimum_size = Vector2(48, 48)
-layout_mode = 2
-theme = ExtResource("4_ic76o")
-text = " ▼ "
-
 [node name="Filter" type="LineEdit" parent="Split/TilesList/Menu"]
 layout_mode = 2
 size_flags_horizontal = 3
@@ -213,6 +270,13 @@ popup/item_0/text = "Add a new Game"
 popup/item_0/id = 0
 popup/item_1/text = "Import from Steam"
 popup/item_1/id = 1
+
+[node name="BtnHelp" type="Button" parent="Split/TilesList/Menu"]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+theme = ExtResource("4_ic76o")
+theme_override_font_sizes/font_size = 16
+text = "i"
 
 [node name="BtnSettings" type="Button" parent="Split/TilesList/Menu"]
 custom_minimum_size = Vector2(48, 48)
@@ -256,10 +320,35 @@ size = Vector2i(234, 106)
 dialog_text = "Do you really want to delete
 that tile?"
 
-[connection signal="dragged" from="Split" to="." method="_on_h_split_container_dragged"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../StartUpSquare")
+libraries = {
+"": SubResource("AnimationLibrary_xxllq")
+}
+autoplay = "start_up"
+
+[node name="StartUpSquare" type="ColorRect" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 0.498039, 0.270588, 1)
+
+[node name="TextureRect" type="TextureRect" parent="StartUpSquare"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("6_s08nj")
+
+[connection signal="dragged" from="Split" to="." method="_on_split_dragged"]
 [connection signal="pressed" from="Split/Preview/Container/Buttons/Launch" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="Split/Preview/Container/Buttons/Menu" to="." method="_on_menu_pressed"]
 [connection signal="resized" from="Split/TilesList" to="." method="resized"]
-[connection signal="pressed" from="Split/TilesList/Menu/BtnFilter" to="." method="_on_btn_filter_pressed"]
 [connection signal="text_submitted" from="Split/TilesList/Menu/Filter" to="." method="_on_line_edit_text_submitted"]
+[connection signal="pressed" from="Split/TilesList/Menu/BtnAdd" to="." method="_on_btn_add_pressed"]
+[connection signal="pressed" from="Split/TilesList/Menu/BtnHelp" to="." method="_on_btn_help_pressed"]
 [connection signal="pressed" from="Split/TilesList/Menu/BtnSettings" to="." method="_on_btn_settings_pressed"]
 [connection signal="item_selected" from="Split/TilesList/ClassicList" to="." method="_on_classic_list_item_selected"]

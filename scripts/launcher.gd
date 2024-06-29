@@ -25,6 +25,11 @@ func reload_settings():
 	else:
 		$Split/TilesList/Scroll.visible = true
 		$Split/TilesList/ClassicList.visible = false
+	
+	if UserSettings.sound_on == true:
+		$AudioStreamPlayer.volume_db = 0
+	else:
+		$AudioStreamPlayer.volume_db = -80
 
 
 func reload_data(): # Reloads all tiles and loads their metadata
@@ -234,10 +239,6 @@ func save_reorder():
 
 func resized():
 	resize_tiles()
-	
-	if $AudioStreamPlayer.playing != true:
-		$AudioStreamPlayer.stream = load("res://assets/sfx/scroll.ogg")
-		$AudioStreamPlayer.play()
 
 func resize_tiles():
 	var w = $Split/TilesList.size.x
@@ -338,7 +339,10 @@ func _on_line_edit_text_submitted(new_text):
 
 
 func _on_btn_settings_pressed():
-	$".".add_child(load("res://scenes/settings.tscn").instantiate())
+	$AudioStreamPlayer.stream = load("res://assets/sfx/select.ogg")
+	$AudioStreamPlayer.play()
+	if $".".get_node("Settings") == null:
+		$".".add_child(load("res://scenes/settings.tscn").instantiate())
 
 
 func _on_classic_list_item_selected(index):
@@ -354,3 +358,26 @@ func _on_classic_list_item_selected(index):
 
 func _on_btn_filter_pressed():
 	$".".add_child(load("res://scenes/dialogs/filters.tscn").instantiate())
+
+
+func _on_split_dragged(offset):
+	if $AudioStreamPlayer.playing != true:
+		$AudioStreamPlayer.stream = load("res://assets/sfx/scroll.ogg")
+		$AudioStreamPlayer.play()
+
+
+func _on_btn_help_pressed():
+	if $".".get_node("Info") == null:
+		$".".add_child(load("res://scenes/dialogs/info.tscn").instantiate())
+	$AudioStreamPlayer.stream = load("res://assets/sfx/select.ogg")
+	$AudioStreamPlayer.play()
+
+
+func _on_menu_pressed():
+	$AudioStreamPlayer.stream = load("res://assets/sfx/select.ogg")
+	$AudioStreamPlayer.play()
+
+
+func _on_btn_add_pressed():
+	$AudioStreamPlayer.stream = load("res://assets/sfx/select.ogg")
+	$AudioStreamPlayer.play()
