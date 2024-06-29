@@ -350,3 +350,7 @@ func _on_classic_list_item_selected(index):
 				if noise.playing != true:
 					noise.stream = load("res://assets/sfx/glass.ogg")
 					noise.play()
+
+
+func _on_btn_filter_pressed():
+	$".".add_child(load("res://scenes/dialogs/filters.tscn").instantiate())

@@ -1,9 +1,9 @@
 [gd_scene load_steps=3 format=3 uid="uid://815bp0x3hnyn"]
 
 [ext_resource type="Theme" uid="uid://bhifb0ujxayun" path="res://assets/themes/dialog.tres" id="1_f3fvq"]
-[ext_resource type="Script" path="res://scenes/dialogs/import/new/importer.gd" id="1_wp3sp"]
+[ext_resource type="Script" path="res://scripts/dialogs/import/new/importer.gd" id="1_wp3sp"]
 
-[node name="Importer" type="Window"]
+[node name="NewImporter" type="Window"]
 title = "Add Tile"
 initial_position = 2
 size = Vector2i(275, 150)

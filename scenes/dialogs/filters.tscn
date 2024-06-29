@@ -1,0 +1,119 @@
+[gd_scene load_steps=3 format=3 uid="uid://pq4m4y0pjav8"]
+
+[ext_resource type="Theme" uid="uid://bhifb0ujxayun" path="res://assets/themes/dialog.tres" id="1_o3u73"]
+[ext_resource type="Script" path="res://scripts/dialogs/filters.gd" id="2_5h6wo"]
+
+[node name="Filters" type="Window"]
+title = "Filters"
+initial_position = 2
+size = Vector2i(600, 450)
+theme = ExtResource("1_o3u73")
+script = ExtResource("2_5h6wo")
+
+[node name="Margin" type="MarginContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="Container" type="VBoxContainer" parent="Margin"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Filters" type="HBoxContainer" parent="Margin/Container"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 8
+
+[node name="Genre" type="PanelContainer" parent="Margin/Container/Filters"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Margin" type="MarginContainer" parent="Margin/Container/Filters/Genre"]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="Container" type="VBoxContainer" parent="Margin/Container/Filters/Genre/Margin"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Margin/Container/Filters/Genre/Margin/Container"]
+layout_mode = 2
+text = "Genre"
+horizontal_alignment = 1
+
+[node name="Input" type="ItemList" parent="Margin/Container/Filters/Genre/Margin/Container"]
+layout_mode = 2
+size_flags_vertical = 3
+select_mode = 1
+
+[node name="Publisher" type="PanelContainer" parent="Margin/Container/Filters"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Margin" type="MarginContainer" parent="Margin/Container/Filters/Publisher"]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="Container" type="VBoxContainer" parent="Margin/Container/Filters/Publisher/Margin"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Margin/Container/Filters/Publisher/Margin/Container"]
+layout_mode = 2
+text = "Publisher"
+horizontal_alignment = 1
+
+[node name="Input" type="ItemList" parent="Margin/Container/Filters/Publisher/Margin/Container"]
+layout_mode = 2
+size_flags_vertical = 3
+select_mode = 1
+
+[node name="Series" type="PanelContainer" parent="Margin/Container/Filters"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Margin" type="MarginContainer" parent="Margin/Container/Filters/Series"]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="Container" type="VBoxContainer" parent="Margin/Container/Filters/Series/Margin"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Margin/Container/Filters/Series/Margin/Container"]
+layout_mode = 2
+text = "Series"
+horizontal_alignment = 1
+
+[node name="Input" type="ItemList" parent="Margin/Container/Filters/Series/Margin/Container"]
+layout_mode = 2
+size_flags_vertical = 3
+select_mode = 1
+
+[node name="Buttons" type="HBoxContainer" parent="Margin/Container"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="BtnSave" type="Button" parent="Margin/Container/Buttons"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Save"
+
+[node name="BtnApply" type="Button" parent="Margin/Container/Buttons"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Apply"
+
+[connection signal="close_requested" from="." to="." method="_on_close_requested"]

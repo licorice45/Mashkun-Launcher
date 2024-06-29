@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://bfsmbg15adkqf"]
 
 [ext_resource type="Theme" uid="uid://bhifb0ujxayun" path="res://assets/themes/dialog.tres" id="1_rwp6q"]
-[ext_resource type="Script" path="res://scenes/dialogs/info.gd" id="2_atjka"]
+[ext_resource type="Script" path="res://scripts/dialogs/info.gd" id="2_atjka"]
 
 [node name="Info" type="Window"]
 title = "Info"

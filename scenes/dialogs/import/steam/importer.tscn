@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://d3kbiiitdptei"]
 
 [ext_resource type="Theme" uid="uid://bhifb0ujxayun" path="res://assets/themes/dialog.tres" id="1_l3w0a"]
-[ext_resource type="Script" path="res://scenes/dialogs/import/steam/importer.gd" id="1_s0eyi"]
+[ext_resource type="Script" path="res://scripts/dialogs/import/steam/importer.gd" id="1_s0eyi"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4gi3n"]
 bg_color = Color(0.172549, 0.466667, 0.858824, 1)

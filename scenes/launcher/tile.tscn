@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://bycrtqu7xh2h7"]
 
 [ext_resource type="Texture2D" uid="uid://iadtiyou2kc3" path="res://assets/textures/cover.png" id="1_u7lul"]
-[ext_resource type="Script" path="res://scenes/launcher/tile.gd" id="2_mhgyw"]
+[ext_resource type="Script" path="res://scripts/launcher/tile.gd" id="2_mhgyw"]
 
 [sub_resource type="Animation" id="Animation_4p78t"]
 resource_name = "A"

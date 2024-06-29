@@ -11,8 +11,13 @@ config_version=5
 [application]
 
 config/name="Mashkun Launcher"
+config/description="Mashkun Launcher is a simplistic front-end for launching your games !
+All with simple theming per game and cover art based list."
+config/version="0.4"
 run/main_scene="res://scenes/launcher.tscn"
 config/features=PackedStringArray("4.2", "GL Compatibility")
+boot_splash/bg_color=Color(1, 0.498039, 0.270588, 1)
+boot_splash/image="res://assets/textures/logo.png"
 config/icon="res://icon.png"
 
 [autoload]

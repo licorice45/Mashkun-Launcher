@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://of14jsxj65s8"]
 
-[ext_resource type="Script" path="res://scenes/launcher.gd" id="1_l6onj"]
+[ext_resource type="Script" path="res://scripts/launcher.gd" id="1_l6onj"]
 [ext_resource type="Texture2D" uid="uid://2rqhv1kdol1o" path="res://assets/textures/bg.png" id="2_qf0mr"]
 [ext_resource type="Texture2D" uid="uid://cr1n3kfkvnyu4" path="res://assets/textures/title.png" id="3_tlowq"]
 [ext_resource type="Theme" uid="uid://d4kh4u5ncgyoa" path="res://assets/themes/launcher.tres" id="4_ic76o"]
@@ -189,6 +189,13 @@ offset_bottom = 48.0
 grow_horizontal = 2
 theme_override_constants/separation = 8
 
+[node name="BtnFilter" type="Button" parent="Split/TilesList/Menu"]
+visible = false
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+theme = ExtResource("4_ic76o")
+text = " ▼ "
+
 [node name="Filter" type="LineEdit" parent="Split/TilesList/Menu"]
 layout_mode = 2
 size_flags_horizontal = 3
@@ -252,6 +259,7 @@ that tile?"
 [connection signal="dragged" from="Split" to="." method="_on_h_split_container_dragged"]
 [connection signal="pressed" from="Split/Preview/Container/Buttons/Launch" to="." method="_on_button_pressed"]
 [connection signal="resized" from="Split/TilesList" to="." method="resized"]
+[connection signal="pressed" from="Split/TilesList/Menu/BtnFilter" to="." method="_on_btn_filter_pressed"]
 [connection signal="text_submitted" from="Split/TilesList/Menu/Filter" to="." method="_on_line_edit_text_submitted"]
 [connection signal="pressed" from="Split/TilesList/Menu/BtnSettings" to="." method="_on_btn_settings_pressed"]
 [connection signal="item_selected" from="Split/TilesList/ClassicList" to="." method="_on_classic_list_item_selected"]
