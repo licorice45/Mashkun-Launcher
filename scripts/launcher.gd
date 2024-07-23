@@ -14,22 +14,24 @@ func _ready():
 
 func reload_settings():
 	await UserSettings.load_settings()
-	if UserSettings.panel_on_left == true:
+	if UserSettings.settings["panel_on_left"] == true:
 		$Split.move_child($Split/Preview, 0)
 	else:
 		$Split.move_child($Split/Preview, 1)
 	
-	if UserSettings.classic_list == true:
+	if UserSettings.settings["classic_list"] == true:
 		$Split/TilesList/Scroll.visible = false
 		$Split/TilesList/ClassicList.visible = true
 	else:
 		$Split/TilesList/Scroll.visible = true
 		$Split/TilesList/ClassicList.visible = false
 	
-	if UserSettings.sound_on == true:
+	if UserSettings.settings["sound_on"] == true:
 		$AudioStreamPlayer.volume_db = 0
 	else:
 		$AudioStreamPlayer.volume_db = -80
+	
+	$Split/Preview/Container/Buttons/Launch.text = UserSettings.settings["launch_label"]
 
 
 func reload_data(): # Reloads all tiles and loads their metadata
@@ -167,7 +169,7 @@ func tile_click(tile):
 	save_reorder()
 
 func reload_theme():
-	if UserSettings.color_fade == true:
+	if UserSettings.settings["color_fade"] == true:
 		get_tree().create_tween().tween_property($Background, "color", Color(current_tile.metadata["color"][0]), 0.5)
 	else:
 		$Background.color = Color(current_tile.metadata["color"][0])
@@ -265,9 +267,9 @@ func _input(event):
 
 func _on_button_pressed():
 	if current_tile["command"] == "steam":
-		current_tile["command"] = UserSettings.windows_steam_directory
+		current_tile["command"] = UserSettings.settings["windows_steam_directory"]
 	if current_tile["command"] == "web":
-		current_tile["command"] = UserSettings.web_directory
+		current_tile["command"] = UserSettings.settings["web_directory"]
 	OS.create_process(current_tile["command"], current_tile["arguments"])
 	print("Attempting to launching: " + current_tile["command"] + " " + str(current_tile["arguments"]))
 	$AudioStreamPlayer.stream = load("res://assets/sfx/confirmation.ogg")

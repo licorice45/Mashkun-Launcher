@@ -72,6 +72,40 @@ layout_mode = 2
 tooltip_text = "NOTE: Can't reorder Games in this mode"
 text = "Classic styled Game List"
 
+[node name="Customization" type="PanelContainer" parent="Margin/Container/Scroll/Container"]
+layout_mode = 2
+
+[node name="Margin" type="MarginContainer" parent="Margin/Container/Scroll/Container/Customization"]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="Container" type="VBoxContainer" parent="Margin/Container/Scroll/Container/Customization/Margin"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Margin/Container/Scroll/Container/Customization/Margin/Container"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.392157, 0.392157, 0.392157, 1)
+text = "Customization"
+horizontal_alignment = 1
+
+[node name="LaunchLabel" type="HBoxContainer" parent="Margin/Container/Scroll/Container/Customization/Margin/Container"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Margin/Container/Scroll/Container/Customization/Margin/Container/LaunchLabel"]
+layout_mode = 2
+text = "Launch Button Text"
+
+[node name="Separator" type="Control" parent="Margin/Container/Scroll/Container/Customization/Margin/Container/LaunchLabel"]
+custom_minimum_size = Vector2(104, 0)
+layout_mode = 2
+
+[node name="Input" type="LineEdit" parent="Margin/Container/Scroll/Container/Customization/Margin/Container/LaunchLabel"]
+layout_mode = 2
+size_flags_horizontal = 3
+
 [node name="Sounds" type="PanelContainer" parent="Margin/Container/Scroll/Container"]
 layout_mode = 2
 

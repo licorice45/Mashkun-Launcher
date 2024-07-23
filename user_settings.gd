@@ -1,16 +1,10 @@
 extends Node
 
-var panel_on_left
-var color_fade
-var classic_list
-var sound_on
-var windows_steam_directory
-var web_directory
-
-var defaults = {
+var settings = {
 	"panel_on_left": true,
 	"color_fade": true,
 	"classic_list": false,
+	"launch_label": "Launch",
 	"sound_on": true,
 	"windows_steam_directory": "steam",
 	"web_directory": "start"
@@ -19,14 +13,11 @@ var defaults = {
 func load_settings():
 	if FileAccess.file_exists("user://settings.json"):
 		var data = JSON.parse_string(FileAccess.get_file_as_string("user://settings.json"))
-		panel_on_left = data["panel_on_left"]
-		color_fade = data["color_fade"]
-		classic_list = data["classic_list"]
-		sound_on = data["sound_on"]
-		windows_steam_directory = data["windows_steam_directory"]
-		web_directory = data["web_directory"]
+		for setting in settings:
+			if data.has(setting):
+				settings[setting] = data[setting]
 	else:
-		save_settings(defaults)
+		save_settings(settings)
 		load_settings()
 
 func save_settings(data):
@@ -35,15 +26,6 @@ func save_settings(data):
 	if data["web_directory"] == "start" && OS.get_name() != "Windows":
 		data["web_directory"] = "xdg-open"
 	
-	var export_metadata = "{
-	\"panel_on_left\": "+ str(data["panel_on_left"]) +",
-	\"color_fade\": "+ str(data["color_fade"]) +",
-	\"classic_list\": "+ str(data["classic_list"]) +",
-	\"sound_on\": "+ str(data["sound_on"]) +",
-	\"windows_steam_directory\": \""+ data["windows_steam_directory"] +"\",
-	\"web_directory\": \""+ data["web_directory"] +"\"
-}"
 	var metadata = FileAccess.open("user://settings.json", FileAccess.WRITE)
-	for line in export_metadata.split("\n"):
-		metadata.store_line(line)
+	metadata.store_line(JSON.stringify(data))
 	metadata.close()
